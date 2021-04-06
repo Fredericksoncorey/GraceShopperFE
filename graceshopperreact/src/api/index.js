@@ -1,6 +1,7 @@
 import { getToken } from "../auth";
 const token = getToken();
 
+
 export const logIn = async ({username, password}) => {
     console.log(username, password)
     try {
@@ -38,5 +39,17 @@ export const register = async ({username, password, email}) => { //get /users
         return data
     } catch (error) {
         console.error(error)
+    }
+}
+
+export const getAllProductsWithReviews = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/products`
+        )
+            const data = response.json()
+            console.log(data)
+            return data
+    } catch (error) {
+        console.error(error);
     }
 }
