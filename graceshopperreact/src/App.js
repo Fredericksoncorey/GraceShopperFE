@@ -2,10 +2,14 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
 import {getToken, clearToken} from "./auth"
 import {
+  Admin,
   Login,
+  Profile,
   Register,
+  AdminCreateProduct,
   Products
 } from "./components"
+
 
 const App = () => {
   const [authorized, setAuthorized] = useState(false);
@@ -53,6 +57,7 @@ const App = () => {
       <main>
         <Switch>
           <Route exact path= '/'>
+            {/* <Home/> */}
           </Route>         
           
           <Route path='/Login'>
@@ -75,14 +80,19 @@ const App = () => {
             <Products/>
           </Route>
 
-          <Route path='/myRoutines'>
+          <Route path='/profile'>
+            <Profile />
           </Route>
           
-          <Route path='/activities'>
+          <Route path='/admin'>
+            <Admin />
           </Route>
           
-          <Route path='/createRoutine'>
+          <Route path='/adminCreateProduct'>
+            <AdminCreateProduct />
           </Route> 
+
+          
 
         </Switch>  
       </main>
