@@ -53,3 +53,27 @@ export const getAllProductsWithReviews = async () => {
         console.error(error);
     }
 }
+
+export const adminCreateProduct = async (product) => {
+
+    
+    try {
+        const response = await fetch(`http://localhost:3000/api/products`,
+            {
+                method: "POST",
+                body: JSON.stringify(product),
+               
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+    )
+        const data = response.json()
+        //console.log(data)
+        return data
+    } catch (error) {
+        console.error(error)
+    }
+
+}

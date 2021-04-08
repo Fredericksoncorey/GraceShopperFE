@@ -5,7 +5,8 @@ import {
   Admin,
   Login,
   Profile,
-  Register
+  Register,
+  AdminCreateProduct
 } from "./components"
 
 
@@ -82,8 +83,11 @@ const App = () => {
             <Admin />
           </Route>
           
-          <Route path='/createRoutine'>
+          <Route path='/adminCreateProduct'>
+            <AdminCreateProduct />
           </Route> 
+
+          
 
         </Switch>  
       </main>
