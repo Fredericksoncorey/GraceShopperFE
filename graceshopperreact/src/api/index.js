@@ -75,5 +75,21 @@ export const adminCreateProduct = async (product) => {
     } catch (error) {
         console.error(error)
     }
+}
 
+export const fetchProducts = async () => {
+    console.log("in fetchProducts")
+    try {
+        const response = await fetch('http://localhost:3000/api/products', {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }).then(response => response.json())
+            .catch(console.error);
+            console.log(response)
+            return response
+    } catch(error){
+        throw error
+    }
 }
