@@ -6,7 +6,7 @@ import {fetchProducts} from "../api"
 //console.log('??')
 const Products = () => {
     const [products, setProducts] = useState([]);
-    console.log('??')
+    //console.log('??')
     useEffect(async () => {
         console.log('in useEffect')
         const response = await fetchProducts()
@@ -14,19 +14,20 @@ const Products = () => {
         console.log(products)
     }, []);
     
-
+    
     return (
-        <div>
+        <div>{console.log(products)}
         <hr></hr>
         {
             products?.map(product => {
-            <div>
-            <h1>Title: {product.title}</h1>
-            <div>{product.imageLink}</div>
-            <img src={product.imageLink}/>
-            <hr></hr>
-            </div>
-            })
+                return (
+                <div>
+                <h1>Title: {product.title}</h1>
+                <div>{product.imageLink}</div>
+                <img src={product.imageLink}/>
+                <hr></hr>
+                </div>
+            )})
         }
         {/* <h1>Title: {products[0].title}</h1>
         <div>{products[0].imageLink}</div>
