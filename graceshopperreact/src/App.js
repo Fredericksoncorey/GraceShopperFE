@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
 import {getToken, clearToken} from "./auth"
 import {
   Login,
-  Register
+  Register,
+  Products
 } from "./components"
 
 const App = () => {
@@ -70,7 +71,8 @@ const App = () => {
             />          
           </Route>
           
-          <Route path='/routines'>
+          <Route path='/products'>
+            <Products/>
           </Route>
 
           <Route path='/myRoutines'>
