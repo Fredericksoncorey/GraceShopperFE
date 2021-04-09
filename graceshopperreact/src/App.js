@@ -8,7 +8,8 @@ import {
   Register,
   AdminCreateProduct,
   Products,
-  Home
+  Home,
+  Cart
 } from "./components"
 
 
@@ -75,6 +76,10 @@ const App = () => {
               setLoggedIn={setLoggedIn}
               setCurrentUser={setCurrentUser}
             />          
+          </Route>
+
+          <Route path='/cart'>
+            <Cart/>
           </Route>
           
           <Route path='/products'>

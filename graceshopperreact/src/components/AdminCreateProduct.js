@@ -1,4 +1,8 @@
-const AdminCreateProduct = () =>{
+import { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
+import {adminCreateProduct} from '../../api'
+
+const AdminCreateProduct = (loggedIn) =>{
 
     return(
         <div>

@@ -6,6 +6,7 @@ import {fetchProducts} from "../api"
 //console.log('??')
 const Products = () => {
     const [products, setProducts] = useState([]);
+    const [numProductInCart, setNumProductInCart] = useState(1)
     //console.log('??')
     useEffect(async () => {
         console.log('in useEffect')
@@ -25,14 +26,14 @@ const Products = () => {
                 <h1>Title: {product.title}</h1>
                 <div>{product.imageLink}</div>
                 <img src={product.imageLink}/>
+                <button onClick={()=> {
+                    localStorage.setItem(`Product: ${numProductInCart}`, product.id)
+                    setNumProductInCart(numProductInCart + 1)
+                }}>Add ProductId to LocalStorage</button>
                 <hr></hr>
                 </div>
             )})
         }
-        {/* <h1>Title: {products[0].title}</h1>
-        <div>{products[0].imageLink}</div>
-        <img src={products[0].imageLink}/>
-        <hr></hr> */}
         </div>
     )
 }
