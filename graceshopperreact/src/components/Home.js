@@ -6,10 +6,12 @@ const Home = () => {
     useEffect(() => {
         getAllProductsWithReviews() 
         .then(response => {
+            console.log(response)
             setAllProducts(response.data);
         })
+        
     }, [])
-
+console.log(allProducts)
         return (<div>
             {
             allProducts?.map((product, index) => {
@@ -21,6 +23,7 @@ const Home = () => {
                 )
             })
         }
+        <h1>hello</h1>
         </div>)
 
 }

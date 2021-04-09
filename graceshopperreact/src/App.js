@@ -7,7 +7,8 @@ import {
   Profile,
   Register,
   AdminCreateProduct,
-  Products
+  Products,
+  Home
 } from "./components"
 
 
@@ -57,7 +58,7 @@ const App = () => {
       <main>
         <Switch>
           <Route exact path= '/'>
-            {/* <Home/> */}
+             <Home />
           </Route>         
           
           <Route path='/Login'>
