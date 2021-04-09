@@ -1,8 +1,8 @@
 import {React, useEffect, useState} from 'react';
 import { getAllProductsWithReviews } from '../api'
 
-const Home = () => {
-    const [allProducts, setAllProducts] = useState([]);
+const Home = ({loggedIn, currentUser}) => {
+    /* const [allProducts, setAllProducts] = useState([]);
     useEffect(() => {
         getAllProductsWithReviews() 
         .then(response => {
@@ -11,9 +11,11 @@ const Home = () => {
         })
         
     }, [])
-console.log(allProducts)
+console.log(allProducts) */
         return (<div>
-            {
+            
+            
+            {/* {
             allProducts?.map((product, index) => {
                 return (
                     <div className='product' key={index}>
@@ -22,8 +24,9 @@ console.log(allProducts)
                     </div>
                 )
             })
-        }
+        } */}
         <h1>hello</h1>
+        <button onClick={()=>{console.log(currentUser)}}>LogginCheck</button>
         </div>)
 
 }
