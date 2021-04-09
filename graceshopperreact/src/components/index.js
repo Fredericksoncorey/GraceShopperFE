@@ -5,3 +5,4 @@ export { default as Profile } from './Profile';
 export { default as Admin } from './Admin';
 export {default as AdminCreateProduct} from './AdminCreateProduct'
 export { default as Products } from './Products';
+export { default as Cart } from './Cart';

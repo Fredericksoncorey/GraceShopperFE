@@ -10,6 +10,17 @@ const Home = () => {
         })
     }, [])
 
+    const SearchBar = ({keyword, setKeyword}) => {
+        return (
+          <input 
+           key="products"
+           value={keyword}
+           placeholder={"search"}
+           onChange={(event) => setKeyword(event.target.value)}
+          />
+        );
+      }
+
         return (<div>
             {
             allProducts?.map((product, index) => {
