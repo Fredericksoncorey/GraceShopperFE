@@ -38,7 +38,7 @@ const AdminCreateProduct = ({isAdmin}) =>{
                     <label>Artist:</label>
                     <input required onChange={(e) => setProduct({ ...product, artist: e.target.value })} />
 
-                    <label>Genre:</label>
+                    <label>Genre:</label> {/* switch to dropdown */}
                     <input required onChange={(e) => setProduct({ ...product, genre: e.target.value })} />
 
                     <label>Release Date:</label>
@@ -50,8 +50,8 @@ const AdminCreateProduct = ({isAdmin}) =>{
                     <label>Price:</label>
                     <input required onChange={(e) => setProduct({ ...product, price: e.target.value })} />
 
-                    <label>Quantity:</label>
-                    <input required onChange={(e) => setProduct({ ...product, quantity: e.target.value })} />
+                    <label for = "quantity">Quantity:</label>
+                    <input type ="number" min="0" required onChange={(e) => setProduct({ ...product, quantity: e.target.value })} />
 
                     <button type="submit">submit</button>
             </form>

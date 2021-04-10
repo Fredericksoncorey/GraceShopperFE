@@ -42,9 +42,10 @@ const Register = ({ setAuthorized, loggedIn, setLoggedIn }) => {
           required
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
-        <label>Email:</label>
+        <label for ="email" >Email:</label>
         <input
           name="email"
+          type = "email"
           required
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
