@@ -1,5 +1,5 @@
 import { getToken } from "../auth";
-const token = getToken();
+
 
 
 export const logIn = async ({username, password}) => {
@@ -14,7 +14,7 @@ export const logIn = async ({username, password}) => {
                 },
             }
     )
-        const data = response.json()
+        const data = await response.json()
         //console.log(data)
         return data
     } catch (error) {
@@ -65,7 +65,7 @@ export const adminCreateProduct = async (product) => {
                
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${getToken()}`
                 }
             }
     )
@@ -92,4 +92,24 @@ export const fetchProducts = async () => {
     } catch(error){
         throw error
     }
+}
+
+export const getUserInfo = async (token) => {
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/users/info`,
+            {  
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+    )
+        const data = response.json()
+        //console.log(data)
+        return data
+    } catch (error) {
+        console.error(error)
+    }  
+
 }

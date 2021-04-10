@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
 import {getToken, clearToken} from "./auth"
+import {getUserInfo} from "./api"
 import {
   Admin,
   Login,
@@ -8,13 +9,13 @@ import {
   Register,
   AdminCreateProduct,
   Products,
-  Cart,
-  Home
+  Home,
+  Cart
 } from "./components"
 
 
 const App = () => {
-  const [authorized, setAuthorized] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(getToken());
   
@@ -22,8 +23,12 @@ const App = () => {
   useEffect(async () => {
     if (loggedIn) {
         try {
-            //const data = await fetchUserData();
-            //setCurrentUser(data.username);
+            const data = await getUserInfo(loggedIn);
+            console.log(data)
+            setCurrentUser(data);
+            if(data.isAdmin){
+              setIsAdmin(true)
+            }
             
         } catch (error) {
             console.error(error);
@@ -42,16 +47,17 @@ const App = () => {
           <Link className="Link" to= '/cart'>Cart</Link>
           <Link className="Link" to= '/orders'>Orders</Link>
           {!loggedIn ? <Link className="Link" to= '/login'>Login</Link> : null}
-          <Link className="Link" to= '/register'>Sign Up</Link>
-          <Link className="Link" to= '/admin'>Admin Link</Link>
+          {!loggedIn ?<Link className="Link" to= '/register'>Sign Up</Link> : null}
+          {isAdmin ? <Link className="Link" to= '/admin'>Admin Link</Link>: null}
           <Link className="Link" to= '/profile'>My Profile</Link>
 
           {loggedIn ? <Link className="Link" onClick={() => {
                         clearToken();
-                        //setUsername(null);
-                        setLoggedIn(null);
+                        setCurrentUser(null)
+                        setLoggedIn(null)
+                        setIsAdmin(false)
                         
-                        //setCurrentUser(null)
+                        
                     }}
                         to='/'>Log Out</Link> : null}
         </div>
@@ -59,7 +65,7 @@ const App = () => {
       <main>
         <Switch>
           <Route exact path= '/'>
-            <Home/>
+             <Home loggedIn={loggedIn} currentUser={currentUser}/>
           </Route>         
           
           <Route path='/Login'>
@@ -91,11 +97,11 @@ const App = () => {
           </Route>
           
           <Route path='/admin'>
-            <Admin />
+            <Admin isAdmin={isAdmin}/>
           </Route>
           
           <Route path='/adminCreateProduct'>
-            <AdminCreateProduct />
+            <AdminCreateProduct isAdmin={isAdmin}/>
           </Route> 
 
           
