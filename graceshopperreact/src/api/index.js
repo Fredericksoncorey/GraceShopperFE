@@ -55,8 +55,6 @@ export const getAllProductsWithReviews = async () => {
 }
 
 export const adminCreateProduct = async (product) => {
-
-    
     try {
         const response = await fetch(`http://localhost:3000/api/products`,
             {
@@ -112,4 +110,44 @@ export const getUserInfo = async (token) => {
         console.error(error)
     }  
 
+}
+
+export const createCartItem = async (product) => {
+    console.log('createCartItem: ', product)
+    try {
+        const response = await fetch(`http://localhost:3000/api/cartItems`,
+            {
+                method: "POST",
+                body: JSON.stringify(product),
+               
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`
+                }
+            }
+    )
+        const data = response.json()
+        console.log(data)
+        return data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const fetchUserCartItems = async (userId) => {
+    //console.log("in fetch")
+    try {
+        const response = await fetch(`http://localhost:3000/api/cartItems/${userId}`, {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getToken()}`
+            },
+          }).then(response => response.json())
+            .catch(console.error);
+            //console.log(response)
+            return response
+    } catch(error){
+        throw error
+    }
 }

@@ -85,11 +85,16 @@ const App = () => {
           </Route>
 
           <Route path='/cart'>
-            <Cart/>
+            <Cart
+            loggedIn={loggedIn}
+            currentUser={currentUser}
+            />
           </Route>
           
           <Route path='/products'>
-            <Products/>
+            <Products
+            loggedIn={loggedIn}
+            />
           </Route>
 
           <Route path='/profile'>
