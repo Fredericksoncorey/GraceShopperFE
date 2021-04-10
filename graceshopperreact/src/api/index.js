@@ -151,3 +151,21 @@ export const fetchUserCartItems = async (userId) => {
         throw error
     }
 }
+
+export const deleteCartItem = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:3000/api/cartItems/${id}`, {
+            method: "DELETE",
+            //body: id,
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getToken()}`
+            },
+          }).then(response => response.json())
+            .catch(console.error);
+            //console.log(response)
+            return response
+    } catch (error) {
+        throw error
+    }
+}

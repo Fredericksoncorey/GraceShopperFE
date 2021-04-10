@@ -1,7 +1,7 @@
 //need to see if there is a 
 import {React, useEffect, useState} from 'react';
 
-import {fetchUserCartItems} from "../api"
+import {fetchUserCartItems, deleteCartItem} from "../api"
 
 
 let numCartItems = 1
@@ -9,7 +9,7 @@ let moreCartItems = true
 let productIds = []
 const Cart = ({loggedIn, currentUser}) =>{
     const [userCart, setUserCart] = useState([])
-    const userId = currentUser.id 
+    const userId = currentUser.id
     useEffect(async () => {
         console.log('in useEffect')
         const response = await fetchUserCartItems(userId)
@@ -41,6 +41,14 @@ const Cart = ({loggedIn, currentUser}) =>{
          return (
          <div>
          <p>Product Id: {item.product}</p>
+         <button onClick={async()=> {
+             //console.log('button clicked, id: ', item.id)
+             const response = await deleteCartItem(item.id)
+                //const newCart = 
+             setUserCart(userCart.filter(cartItem => cartItem.id != response.id));
+             //alert("Item has been removed")
+             //console.log(response)
+         }}>Remove Item From Cart</button>
          <hr></hr>
         </div>
          )

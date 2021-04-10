@@ -28,7 +28,7 @@ const Products = ({loggedIn, currentUser}) => {
                 <div>
                 <h1>Title: {product.title}</h1>
                 <div>{product.imageLink}</div>
-                <img src={product.imageLink}/>
+                <img src={product.imageLink} height="200" with ="200"/>
                 <button value={product.id} onClick={async()=>{
                     //const = this.getAttribute('value')
                     if (loggedIn) {
@@ -40,14 +40,6 @@ const Products = ({loggedIn, currentUser}) => {
                     localStorage.setItem(`Product: ${numProductInCart}`, product.id)
                     setNumProductInCart(numProductInCart + 1)
                     }
-                    //productClickHandler
-                    // if (!loggedIn) {
-                    // localStorage.setItem(`Product: ${numProductInCart}`, product.id)
-                    // setNumProductInCart(numProductInCart + 1)
-                    // } else if (loggedIn) {
-                    //     makeCartItem
-                        //async () => {const response = await createCartItem(product)}
-                    //}
                 }}>Add ProductId to Cart</button>
                 <hr></hr>
                 </div>
@@ -59,9 +51,3 @@ const Products = ({loggedIn, currentUser}) => {
 
 export default Products
 
-// const [activities, setActivities] = useState([]);
-// useEffect (async () => {
-//     const response = await fetchActivities()
-//     setActivities(response)
-//     console.log('activities', response)
-// }, [])
