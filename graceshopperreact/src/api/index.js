@@ -125,8 +125,30 @@ export const createCartItem = async (product) => {
                     Authorization: `Bearer ${getToken()}`
                 }
             }
+        )
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+    export const destroyProduct = async (product) => {
+
+    
+    try {
+        const response = await fetch(`http://localhost:3000/api/products`,
+            {
+                method: "DELETE",
+                body: JSON.stringify(product),
+               
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`
+                }
+            }
     )
-        const data = response.json()
+        const data = await response.json()
         console.log(data)
         return data
     } catch (error) {
@@ -148,6 +170,43 @@ export const fetchUserCartItems = async (userId) => {
             //console.log(response)
             return response
     } catch(error){
+        throw error
+    }
+}
+
+export const searchProductsByArtist = async (artist) => {
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/products/artist/${artist}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        const data = await response.json()
+        console.log(data)
+        return data
+        
+            
+    } catch(error){
+        throw error
+    }
+
+}
+
+export const deleteCartItem = async (id) => {
+    try {
+        const response = await fetch(`http://localhost:3000/api/cartItems/${id}`, {
+            method: "DELETE",
+            //body: id,
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getToken()}`
+            },
+          }).then(response => response.json())
+            .catch(console.error);
+            //console.log(response)
+            return response
+    } catch (error) {
         throw error
     }
 }

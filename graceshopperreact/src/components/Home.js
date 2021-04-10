@@ -1,10 +1,35 @@
 import {React, useEffect, useState} from 'react';
-import { fetchProducts } from '../api'
+import { fetchProducts, searchProductsByArtist } from '../api'
 
 const Home = ({loggedIn, currentUser}) => {
     const [allProducts, setAllProducts] = useState([]);
-    const [keyword, setKeyword] = useState('')
-     useEffect(async () => {
+    //const [keyword, setKeyword] = useState('')
+    const [search,setSearch] = useState()
+    const [searchResults, setSearchResults] = useState()
+     
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        try {
+            setSearchResults(await searchProductsByArtist(search)) 
+            
+        } catch (error) {
+            throw error
+        }
+
+
+    }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
+        if(!searchResults){
+            return
+        }else{
+            console.log(searchResults)
+        }
+        
+    }, [searchResults]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
          console.log('in useEffect')
         const response = await fetchProducts()
          setAllProducts(response)
@@ -39,7 +64,9 @@ const Home = ({loggedIn, currentUser}) => {
         }
     }
  */
-    const productFilter = (keyword) => {
+    /* const productFilter = (event) => {
+        event.preventDefault()
+        let keyword = event.target.value
         const searchProducts = allProducts.filter(filteredProduct(keyword))
         setAllProducts(searchProducts)
     }
@@ -49,29 +76,78 @@ const Home = ({loggedIn, currentUser}) => {
                 return products
             }else return
            })
-    }
-        return (<div>
-                <input 
-                key="products"
-                value={keyword}
-                placeholder={"search"}
-                onChange={(event) => setKeyword(event.target.value)}
-                />
-                <button onClick={() => productFilter(keyword)}>Search</button>
-            
-            {
-            allProducts?.map((product, index) => {
+    } */
+        return (
+        <div>
+            {/*         <input 
+                    key="products"
+                    value={keyword}
+                    placeholder={"search"}
+                    onChange={(event) => setKeyword(event.target.value)}
+                    />
+                    <button onClick={() => productFilter(keyword)}>Search</button>
+                    
+                    {
+                    allProducts?.map((product, index) => {
+                        return (
+                            <div className='product' key={index}>
+                                <h3>{product.title}</h3>
+                                <p>{product.description}</p>
+                            </div>
+                        )
+                    })
+                } */}
+        
+        <form onSubmit={handleSubmit}>
+            <h3> Search:</h3>
+            <label>Search By Artist:</label>
+            <input
+            name="artist"
+            required
+            onChange={(e) => setSearch(e.target.value)}
+            />
+            <button type="submit">submit</button>
+
+        </form>
+        <h1>hello</h1>
+        <button onClick={()=>{console.log(currentUser)}}>LogginCheck</button>
+            {!searchResults ? allProducts?.map(product => {
                 return (
-                    <div className='product' key={index}>
-                        <h3>{product.title}</h3>
-                        <p>{product.description}</p>
+                    <div>
+                        <h3>Title: {product.title}</h3>
+                        <p>{product.desciption}</p>
+                        <p>{product.artist}</p>
+                        <p>{product.genre}</p>
+                        <p>{product.releaseDate}</p>
+                        <p>{product.price}</p>
+                        <p>{product.quantity}</p>
+                        
+                        <img alt="imageLink" src={product.imageLink}/>
                     </div>
                 )
             })
-        }
-        <h1>hello</h1>
-        <button onClick={()=>{console.log(currentUser)}}>LogginCheck</button>
-        </div>)
+            
+            :  searchResults?.map(product => {
+                return (
+                    <div>
+                        <h3>Title: {product.title}</h3>
+                        <p>{product.desciption}</p>
+                        <p>{product.artist}</p>
+                        <p>{product.genre}</p>
+                        <p>{product.releaseDate}</p>
+                        <p>{product.price}</p>
+                        <p>{product.quantity}</p>
+                        
+                        <img alt="imageLink" src={product.imageLink}/>
+                    </div>
+                )
+            })
+                
+            }
+        
+    </div> )          
+
+         
 
 }
 

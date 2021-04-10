@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
-import {adminCreateProduct} from '../api'
+import {adminCreateProduct} from '../api';
+
 
 const AdminCreateProduct = ({isAdmin}) =>{
     const [product, setProduct] = useState({imageLink: null})
-
+    const [finished, setFinished] = useState(false)
 
 
     const handleSubmit = async (evt)=>{
@@ -12,6 +13,7 @@ const AdminCreateProduct = ({isAdmin}) =>{
         try {
             const response = await adminCreateProduct(product)
             console.log(response)
+
             
         }catch (error) {
             throw error
@@ -21,6 +23,8 @@ const AdminCreateProduct = ({isAdmin}) =>{
     }
     if (!isAdmin ){
         return <Redirect to="/" />
+    }else if(finished){
+        return <Redirect to="/admin" />
     }else{
         return(
             <div>
@@ -50,7 +54,7 @@ const AdminCreateProduct = ({isAdmin}) =>{
                     <label>Price:</label>
                     <input required onChange={(e) => setProduct({ ...product, price: e.target.value })} />
 
-                    <label for = "quantity">Quantity:</label>
+                    <label htmlFor = "quantity">Quantity:</label>
                     <input type ="number" min="0" required onChange={(e) => setProduct({ ...product, quantity: e.target.value })} />
 
                     <button type="submit">submit</button>
