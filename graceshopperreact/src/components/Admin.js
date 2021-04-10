@@ -1,20 +1,39 @@
 import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router';
 import { React, useEffect, useState} from 'react';
-import { fetchProducts, destroyProduct } from '../api';
+import { fetchProducts, destroyProduct, updateProduct } from '../api';
 
 const Admin = ({isAdmin}) =>{
-    const [allProducts, setAllProducts] = useState([]);
+    const [products, setProducts] = useState([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         try{ console.log('in useEffect')
          const response = await fetchProducts()
-         setAllProducts(response)
-         console.log(allProducts)
+         setProducts(response)
+         console.log(products)
         } catch (error){
          console.log(error)
         }
-    })
+    },[])
+    const handleSubmitUpdate = async (event)=>{
+        event.preventDefault();
+        try {
+            const response = await updateProduct(products.id)
+            console.log(response)
+            
+        }catch (error) {
+            throw error
+        }
+    }
+    const handleSubmitDelete = async (event)=>{
+        event.preventDefault();
+        try {
+            const response = await destroyProduct(products.id)
+            console.log(response)    
+        }catch (error) {
+            throw error
+        }
+    }
     if (!isAdmin ){
         return <Redirect to="/" />
     }else{
@@ -26,7 +45,7 @@ const Admin = ({isAdmin}) =>{
             </Link> 
             <div>        
             {
-            allProducts?.map(product => {
+            products?.map(product => {
                 return (
                 <div>
                 <h1>Title: {product.title}</h1>
@@ -34,8 +53,8 @@ const Admin = ({isAdmin}) =>{
                 <p>Genre: {product.genre}</p>
                 <div>{product.imageLink}</div>
                 <img src={product.imageLink}/>
-                <button>Edit</button>
-                <button onClick={destroyProduct()}>Delete</button>
+                <button onClick={handleSubmitUpdate(product.id)}>Edit</button>
+                <button onClick={handleSubmitDelete(product.id)}>Delete</button>
                 </div>
             )})
             }</div>
