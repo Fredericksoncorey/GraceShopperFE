@@ -127,8 +127,30 @@ export const createCartItem = async (product) => {
                     Authorization: `Bearer ${getToken()}`
                 }
             }
+        )
+        const data = await response.json()
+        return data
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+    export const destroyProduct = async (product) => {
+
+    
+    try {
+        const response = await fetch(`http://localhost:3000/api/products`,
+            {
+                method: "DELETE",
+                body: JSON.stringify(product),
+               
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`
+                }
+            }
     )
-        const data = response.json()
+        const data = await response.json()
         console.log(data)
         return data
     } catch (error) {

@@ -130,8 +130,14 @@ const Home = ({loggedIn, currentUser}) => {
             :  searchResults?.map(product => {
                 return (
                     <div>
-                        <h1>Title: {product.title}</h1>
-                        <div>{product.imageLink}</div>
+                        <h3>Title: {product.title}</h3>
+                        <p>{product.desciption}</p>
+                        <p>{product.artist}</p>
+                        <p>{product.genre}</p>
+                        <p>{product.releaseDate}</p>
+                        <p>{product.price}</p>
+                        <p>{product.quantity}</p>
+                        
                         <img alt="imageLink" src={product.imageLink}/>
                     </div>
                 )
