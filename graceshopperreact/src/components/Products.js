@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { storeToken } from "../auth";
 import {Redirect} from "react-router-dom"
-import {fetchProducts} from "../api"
+import {fetchProducts, createCartItem} from "../api"
 
 //console.log('??')
-const Products = () => {
+const Products = ({loggedIn, currentUser}) => {
     const [products, setProducts] = useState([]);
     const [numProductInCart, setNumProductInCart] = useState(1)
+
+    const userId = currentUser.id
     //console.log('??')
     useEffect(async () => {
         console.log('in useEffect')
-        const response = await fetchProducts()
+        const response = await fetchProducts(userId)
         setProducts(response)
         console.log(products)
     }, []);
-    
-    
+
+
+    let productToAdd = {}
     return (
         <div>{console.log(products)}
         <hr></hr>
@@ -26,10 +29,26 @@ const Products = () => {
                 <h1>Title: {product.title}</h1>
                 <div>{product.imageLink}</div>
                 <img src={product.imageLink}/>
-                <button onClick={()=> {
+                <button value={product.id} onClick={async()=>{
+                    //const = this.getAttribute('value')
+                    if (loggedIn) {
+                        productToAdd.userId = userId
+                        productToAdd.productId = product.id
+                        productToAdd.quantity = 1
+                        const response = await createCartItem(productToAdd)
+                    } else if (!loggedIn){
                     localStorage.setItem(`Product: ${numProductInCart}`, product.id)
                     setNumProductInCart(numProductInCart + 1)
-                }}>Add ProductId to LocalStorage</button>
+                    }
+                    //productClickHandler
+                    // if (!loggedIn) {
+                    // localStorage.setItem(`Product: ${numProductInCart}`, product.id)
+                    // setNumProductInCart(numProductInCart + 1)
+                    // } else if (loggedIn) {
+                    //     makeCartItem
+                        //async () => {const response = await createCartItem(product)}
+                    //}
+                }}>Add ProductId to Cart</button>
                 <hr></hr>
                 </div>
             )})
