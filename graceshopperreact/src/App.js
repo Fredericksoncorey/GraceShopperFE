@@ -94,6 +94,7 @@ const App = () => {
           <Route path='/products'>
             <Products
             loggedIn={loggedIn}
+            currentUser={currentUser}
             />
           </Route>
 

@@ -4,12 +4,11 @@ import {Redirect} from "react-router-dom"
 import {fetchProducts, createCartItem} from "../api"
 
 //console.log('??')
-const Products = ({loggedIn}) => {
+const Products = ({loggedIn, currentUser}) => {
     const [products, setProducts] = useState([]);
     const [numProductInCart, setNumProductInCart] = useState(1)
 
-        //need to fix this hard coding by passing in state
-        const userId = 4
+    const userId = currentUser.id
     //console.log('??')
     useEffect(async () => {
         console.log('in useEffect')
