@@ -10,9 +10,10 @@ const Products = ({loggedIn, currentUser}) => {
 
     const userId = currentUser.id
     //console.log('??')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         console.log('in useEffect')
-        const response = await fetchProducts(userId)
+        const response = await fetchProducts()
         setProducts(response)
         console.log(products)
     }, []);
