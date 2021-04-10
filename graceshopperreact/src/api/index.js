@@ -207,6 +207,26 @@ export const deleteCartItem = async (id) => {
             //console.log(response)
             return response
     } catch (error) {
-        throw error
+        throw error}
+}
+
+
+        export const updateProduct = async (product) => {
+    try {
+        const response = await fetch(`http://localhost:3000/api/products`,
+            {
+                method: "DELETE",
+                body: JSON.stringify(product),
+               
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${getToken()}`
+                }
+            }
+    )
+        const data = response.json()
+        return data
+    } catch (error) {
+        console.error(error)
     }
 }

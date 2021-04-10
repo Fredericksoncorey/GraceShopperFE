@@ -103,7 +103,6 @@ const Home = ({loggedIn, currentUser}) => {
             <label>Search By Artist:</label>
             <input
             name="artist"
-            required
             onChange={(e) => setSearch(e.target.value)}
             />
             <button type="submit">submit</button>
