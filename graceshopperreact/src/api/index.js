@@ -193,6 +193,44 @@ export const searchProductsByArtist = async (artist) => {
 
 }
 
+export const searchProductsByGenre = async (genre) => {
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/products/genre/${genre}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        const data = await response.json()
+        console.log(data)
+        return data
+        
+            
+    } catch(error){
+        throw error
+    }
+
+}
+
+export const searchProductsByTitle = async (title) => {
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/products/title/${title}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        const data = await response.json()
+        console.log(data)
+        return data
+        
+            
+    } catch(error){
+        throw error
+    }
+
+}
+
 export const deleteCartItem = async (id) => {
     try {
         const response = await fetch(`http://localhost:3000/api/cartItems/${id}`, {
