@@ -30,21 +30,21 @@ const Admin = ({isAdmin}) =>{
                     quantity: quantity.value
                 })
             }
-        try {
+        /* try {
             const response = await updateProduct(productId)
             console.log(response)
             
         }catch (error) {
             throw error
-        }
+        } */
     }
     const handleSubmitDelete = async ()=>{
-        try {
+        /* try {
             const response = await destroyProduct(productId)
             console.log(response)    
         }catch (error) {
             throw error
-        }
+        } */
     }
     if (!isAdmin ){
         return <Redirect to="/" />
