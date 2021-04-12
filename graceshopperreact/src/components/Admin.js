@@ -26,7 +26,7 @@ const Admin = ({ isAdmin }) => {
 //     try {
 //       const response = await getAllUsers();
 //       setUsers(response)
-//       console.log(response);
+//       console.log(users);
 //     } catch (error) {
 //       console.log(error);
 //     }
@@ -39,7 +39,8 @@ const Admin = ({ isAdmin }) => {
   const handleSubmitDelete = async () => {
     try {
       const response = await destroyProduct();
-      console.log(response);
+      setProducts(response)
+      console.log(products);
     } catch (error) {
       throw error;
     }
@@ -52,7 +53,7 @@ const Admin = ({ isAdmin }) => {
         <h1>Admin Page</h1>
         <Link to="/adminCreateProduct">Add a Product To List</Link>
 
-        {products?.map((product) => {
+        {products?.map(product => {
           return (
             <div className="products">
               <h1>Title: {product.title}</h1>
@@ -61,11 +62,11 @@ const Admin = ({ isAdmin }) => {
               <div>{product.imageLink}</div>
               <img src={product.imageLink} />
               <button type="button" onClick={handleClick}>Edit</button>
-              <button onClick={() => handleSubmitDelete(product.id)}>Delete</button>
+              <button type="button" onClick={() => handleSubmitDelete(product.id)}>Delete</button>
             </div>
           );
         })}
-        {/* {
+        {
             users?.map((user) => {
                 return(
                 <div>
@@ -74,7 +75,7 @@ const Admin = ({ isAdmin }) => {
                 </div>
                 )
             })
-        } */}
+        }
       </div>
     );
   }
