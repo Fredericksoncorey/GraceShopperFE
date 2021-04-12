@@ -3,7 +3,6 @@ import { fetchProducts, searchProductsByArtist, searchProductsByGenre, searchPro
 
 const Home = ({loggedIn, currentUser}) => {
     const [allProducts, setAllProducts] = useState([]);
-    //const [keyword, setKeyword] = useState('')
     const [artistSearch,setArtistSearch] = useState()
     const [genreSearch,setGenreSearch] = useState();
     const [titleSearch,setTitleSearch] = useState();
@@ -12,11 +11,18 @@ const Home = ({loggedIn, currentUser}) => {
     const [selectedSearch, setSelectedSearch] = useState()
     
      
+    const averageRating = ({reviews}) => {
+        let averageRating = 0
+        console.log(reviews)
+        for (let i=0;i<reviews.length;i++){
+            averageRating = averageRating + reviews[i].rating
+        }
+        averageRating = averageRating/reviews.length
+        return averageRating
+    }
+    
     const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(genreSearch)
-        console.log(artistSearch)
-        console.log(titleSearch)
         try {
             if(artistSearch){
                 setSearchResults(await searchProductsByArtist(artistSearch))
@@ -25,13 +31,11 @@ const Home = ({loggedIn, currentUser}) => {
             }else if(titleSearch){
                 setSearchResults(await searchProductsByTitle(titleSearch))
             }
-            
 
-            
         } catch (error) {
             throw error
         }finally{
-            console.log(searchResults)
+           /*  console.log(searchResults) */
               
         }
 
@@ -55,7 +59,6 @@ const Home = ({loggedIn, currentUser}) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
-         console.log('in useEffect')
         const response = await fetchProducts()
          setAllProducts(response)
          console.log(allProducts)
@@ -122,7 +125,7 @@ const Home = ({loggedIn, currentUser}) => {
                         )
                     })
                 } */}
-        `<h3> Search:</h3>
+        <h3> Search:</h3>
         <form onSubmit={handleSubmit}>
             <label>Search By...</label>
             <select
@@ -160,7 +163,6 @@ const Home = ({loggedIn, currentUser}) => {
             name="genre"
             value={genreSearch}
             onChange={(e) => {
-                console.log(e.target.value)
                 setArtistSearch(null)
                 setTitleSearch(null)
                 return setGenreSearch(e.target.value)}}
@@ -194,12 +196,18 @@ const Home = ({loggedIn, currentUser}) => {
         <h1>hello</h1>
         <button onClick={()=>{console.log(currentUser)}}>LogginCheck</button>
             {!searchResults ? allProducts?.map(product => {
+                
                 return (
                     <div>
                         <h3>Title: {product.title}</h3>
+                        <p>Rating: {averageRating(product)}</p>
                         <p>{product.desciption}</p>
                         <p>{product.artist}</p>
                         <p>{product.genre}</p>
+                        {product.reviews.map(review => { //------I was here!!!
+                            return(
+                            <p>{review.review}</p>)
+                        })}
                         <p>{product.releaseDate.slice(0,10)}</p>
                         <p>{product.price}</p>
                         <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
@@ -229,7 +237,7 @@ const Home = ({loggedIn, currentUser}) => {
 
             {searchFailed ? 
                 
-                <h3>Nothing came back, something went wrong in your search.</h3>
+                <h3>Nothing came back, something went wrong with the search.</h3>
             : null}
         
     </div> )          
@@ -237,5 +245,7 @@ const Home = ({loggedIn, currentUser}) => {
          
 
 }
+
+
 
 export default Home;
