@@ -10,7 +10,9 @@ import {
   AdminCreateProduct,
   Products,
   Home,
-  Cart
+  UserCart,
+  GuestCart,
+  Orders
 } from "./components"
 
 
@@ -18,13 +20,13 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(getToken());
-  
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     if (loggedIn) {
         try {
             const data = await getUserInfo(loggedIn);
-            console.log(data)
+            //console.log(data)
             setCurrentUser(data);
             if(data.isAdmin){
               setIsAdmin(true)
@@ -85,10 +87,11 @@ const App = () => {
           </Route>
 
           <Route path='/cart'>
-            <Cart
+            {loggedIn ? <UserCart
             loggedIn={loggedIn}
             currentUser={currentUser}
             />
+            : <GuestCart/>}
           </Route>
           
           <Route path='/products'>
@@ -96,6 +99,10 @@ const App = () => {
             loggedIn={loggedIn}
             currentUser={currentUser}
             />
+          </Route>
+
+          <Route path='/orders'>
+            <Orders currentUser={currentUser}/>
           </Route>
 
           <Route path='/profile'>
