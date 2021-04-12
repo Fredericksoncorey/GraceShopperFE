@@ -1,14 +1,14 @@
 import { React, useState } from "react";
 import { updateProduct } from "../api";
 
-const EditProduct = (props) => {
+const EditProduct = () => {
   const [product, setProduct] = useState('');
   const [title, setTitle] = useState('')
 
   const handleSubmitUpdate = async (event) => {
       event.preventDefault()
     try {
-      const response = await updateProduct();
+      const response = await updateProduct(product.id);
       setProduct(response)
       console.log(product);
     } catch (error) {

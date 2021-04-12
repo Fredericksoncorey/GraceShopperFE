@@ -66,7 +66,7 @@ const Admin = ({ isAdmin }) => {
             </div>
           );
         })}
-        {
+        {/* {
             users?.map((user) => {
                 return(
                 <div>
@@ -75,7 +75,7 @@ const Admin = ({ isAdmin }) => {
                 </div>
                 )
             })
-        }
+        } */}
       </div>
     );
   }
