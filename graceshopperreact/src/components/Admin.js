@@ -5,7 +5,7 @@ import { fetchProducts, destroyProduct, getAllUsers } from "../api";
 import { useHistory } from "react-router-dom";
 
 
-const Admin = ({ isAdmin }) => {
+const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
   let history = useHistory();
@@ -32,9 +32,10 @@ const Admin = ({ isAdmin }) => {
 //     }
 //   }, []);
 
-  function handleClick() {
-    history.push("/editproduct");
-  }
+//   function handleClick({}) {
+    
+//     history.push("/editproduct");
+//   }
   
   const handleSubmitDelete = async () => {
     try {
@@ -61,7 +62,8 @@ const Admin = ({ isAdmin }) => {
               <p>Genre: {product.genre}</p>
               <div>{product.imageLink}</div>
               <img src={product.imageLink} />
-              <button type="button" onClick={handleClick}>Edit</button>
+              <button type="button" onClick={() => 
+               {setProductEdit(product.id); history.push("/editproduct") }}>Edit</button>
               <button type="button" onClick={() => handleSubmitDelete(product.id)}>Delete</button>
             </div>
           );

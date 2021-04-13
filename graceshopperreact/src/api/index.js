@@ -241,10 +241,10 @@ export const deleteCartItem = async (id) => {
   }
 };
 
-export const updateProduct = async (product, id) => {
+export const updateProduct = async (product) => {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/products/update/${id}`,
+      `http://localhost:3000/api/products/update/${product.id}`,
       {
         method: "PATCH",
         body: JSON.stringify(product),

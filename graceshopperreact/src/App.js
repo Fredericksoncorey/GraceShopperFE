@@ -21,6 +21,7 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(getToken());
+  const [productEdit, setProductEdit] = useState('');
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
@@ -81,9 +82,8 @@ const App = () => {
 
           <Route path='/EditProduct'>
           <EditProduct 
-              loggedIn={loggedIn}
-              setLoggedIn={setLoggedIn}
-              setCurrentUser={setCurrentUser}
+              productEdit = {productEdit} 
+              setProductEdit = {setProductEdit}
             />          
           </Route>
           
@@ -119,7 +119,10 @@ const App = () => {
           </Route>
           
           <Route path='/admin'>
-            <Admin isAdmin={isAdmin}/>
+            <Admin 
+            isAdmin={isAdmin}
+            productEdit = {productEdit} 
+            setProductEdit = {setProductEdit}/>
           </Route>
           
           <Route path='/adminCreateProduct'>
