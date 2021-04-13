@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [productDelete, setProductDelete] = useState([])
   let history = useHistory();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,15 +38,15 @@ const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
 //     history.push("/editproduct");
 //   }
   
-  const handleSubmitDelete = async () => {
-    try {
-      const response = await destroyProduct();
-      setProducts(response)
-      console.log(products);
-    } catch (error) {
-      throw error;
-    }
-  };
+//   const handleSubmitDelete = async () => { 
+//     try {
+//       const response = await destroyProduct(products);
+//       setProducts(response)
+//       console.log(products);
+//     } catch (error) {
+//       throw error;
+//     }
+//   };
   if (!isAdmin) {
     return <Redirect to="/" />;
   } else {
@@ -64,7 +65,8 @@ const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
               <img src={product.imageLink} />
               <button type="button" onClick={() => 
                {setProductEdit(product.id); history.push("/editproduct") }}>Edit</button>
-              <button type="button" onClick={() => handleSubmitDelete(product.id)}>Delete</button>
+              <button type="button" onClick={async () => {const response = await destroyProduct(product.id)
+                setProductDelete(productDelete.filter(product => product.id !== response.id))}}>Delete</button>
             </div>
           );
         })}
