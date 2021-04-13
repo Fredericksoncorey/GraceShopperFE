@@ -184,6 +184,44 @@ export const searchProductsByArtist = async (artist) => {
   }
 };
 
+export const searchProductsByGenre = async (genre) => {
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/products/genre/${genre}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        const data = await response.json()
+        console.log(data)
+        return data
+        
+            
+    } catch(error){
+        throw error
+    }
+
+}
+
+export const searchProductsByTitle = async (title) => {
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/products/title/${title}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        const data = await response.json()
+        console.log(data)
+        return data
+        
+            
+    } catch(error){
+        throw error
+    }
+
+}
+
 export const deleteCartItem = async (id) => {
   try {
     const response = await fetch(`http://localhost:3000/api/cartItems/${id}`, {
@@ -239,4 +277,46 @@ export const getAllUsers = async () => {
     } catch (error) {
       throw error;
     }
-  };
+}
+
+export const createOrder = async (userId, productId, quantity) => {
+    const order = {
+        userId,
+        productId,
+        quantity
+    }
+    try {
+        const response = await fetch('http://localhost:3000/api/orders', {
+            method: "POST",
+            body: JSON.stringify(order),
+            
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getToken()}`
+            }
+        }).then(response => response.json())
+            .catch(console.error);
+            //console.log(response)
+            return response
+    } catch (error) {
+        throw error
+    }
+}
+
+export const fetchUserOrders = async (userId) => {
+    //console.log("in fetch")
+    try {
+        const response = await fetch(`http://localhost:3000/api/orders/${userId}`, {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getToken()}`
+            },
+          }).then(response => response.json())
+            .catch(console.error);
+            //console.log(response)
+            return response
+    } catch(error){
+        throw error
+    }
+}
