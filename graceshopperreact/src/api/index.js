@@ -133,10 +133,12 @@ export const destroyProduct = async (product, id) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
-    });
-    const data = await response.json();
-    console.log(data);
-    return data;
+    })
+    // const data = await response.json();
+    // console.log(data);
+    .then((response) => response.json())
+    .catch(console.error);
+    return response;
   } catch (error) {
     console.error(error);
   }
