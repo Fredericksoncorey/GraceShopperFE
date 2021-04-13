@@ -8,20 +8,19 @@ const Products = ({loggedIn, currentUser}) => {
     const [products, setProducts] = useState([]);
     const [numProductInCart, setNumProductInCart] = useState(1)
 
-    const userId = currentUser.id
-    //console.log('??')
+    //const userId = currentUser.id
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         console.log('in useEffect')
         const response = await fetchProducts()
         setProducts(response)
-        console.log(products)
+        //console.log(products)
     }, []);
 
-
+    let guestCart = [] 
     let productToAdd = {}
     return (
-        <div>{console.log(products)}
+        <div>
         <hr></hr>
         {
             products?.map(product => {
@@ -33,13 +32,27 @@ const Products = ({loggedIn, currentUser}) => {
                 <button value={product.id} onClick={async()=>{
                     //const = this.getAttribute('value')
                     if (loggedIn) {
-                        productToAdd.userId = userId
+                        productToAdd.userId = currentUser.id
                         productToAdd.productId = product.id
                         productToAdd.quantity = 1
                         const response = await createCartItem(productToAdd)
                     } else if (!loggedIn){
-                    localStorage.setItem(`Product: ${numProductInCart}`, product.id)
-                    setNumProductInCart(numProductInCart + 1)
+                        if (localStorage.getItem('guestCartItems')) {
+                            //console.log('in if')
+                        guestCart = JSON.parse(localStorage.getItem('guestCartItems'))
+                        //console.log('guest cart: ', guestCart)
+                        guestCart.push(product.id)
+                        const newCart = JSON.stringify(guestCart)
+                        //console.log('guest cart stringify if ', newCart)
+                        localStorage.setItem('guestCartItems', newCart)
+                        } else {
+                            //console.log('in else')
+                            guestCart = [product.id]
+                            let newCart = JSON.stringify(guestCart)
+                            //console.log('guest cart stringify else ', newCart)
+                            localStorage.setItem('guestCartItems', newCart)}
+                    // localStorage.setItem(`Product: ${numProductInCart}`, product.id)
+                    // setNumProductInCart(numProductInCart + 1)
                     }
                 }}>Add ProductId to Cart</button>
                 <hr></hr>
