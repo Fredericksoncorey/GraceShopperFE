@@ -126,7 +126,7 @@ const Home = ({loggedIn, currentUser}) => {
                     })
                 } */}
         <h3> Search:</h3>
-        <form onSubmit={handleSubmit}>
+        <form>
             <label>Search By...</label>
             <select
             name="select"
@@ -139,7 +139,7 @@ const Home = ({loggedIn, currentUser}) => {
             <option value="genre">Genre</option>
             <option value="title">Album Title</option>
             </select> 
-            <button type="submit">submit</button> 
+            
              
         </form>
 
@@ -200,13 +200,15 @@ const Home = ({loggedIn, currentUser}) => {
                 return (
                     <div>
                         <h3>Title: {product.title}</h3>
-                        <p>Rating: {averageRating(product)}</p>
+                        <p>Rating: {`${averageRating(product)}/5`}</p>
                         <p>{product.desciption}</p>
                         <p>{product.artist}</p>
                         <p>{product.genre}</p>
                         {product.reviews.map(review => { //------I was here!!!
-                            return(
-                            <p>{review.review}</p>)
+                            return(<p>{review.review}</p> ) // Add created by User, fetch user by username.
+                            //also individual rating
+                            
+                           
                         })}
                         <p>{product.releaseDate.slice(0,10)}</p>
                         <p>{product.price}</p>
