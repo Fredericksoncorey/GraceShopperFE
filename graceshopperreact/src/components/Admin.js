@@ -1,20 +1,17 @@
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
 import { React, useEffect, useState } from "react";
-import { fetchProducts, destroyProduct, getAllUsers } from "../api";
+import { fetchProducts, destroyProduct} from "../api";
 import { useHistory } from "react-router-dom";
 
 
 const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
   const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [productDelete, setProductDelete] = useState([])
   let history = useHistory();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     try {
-      console.log("in useEffect");
       const response = await fetchProducts()
       setProducts(response)
       console.log(products)
@@ -22,31 +19,18 @@ const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
       console.log(error);
     }
   }, []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-//   useEffect(async () => {
-//     try {
-//       const response = await getAllUsers();
-//       setUsers(response)
-//       console.log(users);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }, []);
 
-//   function handleClick({}) {
-    
-//     history.push("/editproduct");
-//   }
+
   
-//   const handleSubmitDelete = async () => { 
-//     try {
-//       const response = await destroyProduct(products);
-//       setProducts(response)
-//       console.log(products);
-//     } catch (error) {
-//       throw error;
-//     }
-//   };
+  const handleSubmitDelete = async (deleteProductId) => { 
+    try {
+      const response = await destroyProduct(deleteProductId);
+        setProducts(products.filter(product => product.id !== deleteProductId))
+        console.log(response)
+    } catch (error) {
+      throw error;
+    }
+  };
   if (!isAdmin) {
     return <Redirect to="/" />;
   } else {
@@ -54,7 +38,7 @@ const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
       <div>
         <h1>Admin Page</h1>
         <Link to="/adminCreateProduct">Add a Product To List</Link>
-
+        <Link to="/users">See all Users</Link>
         {products?.map(product => {
           return (
             <div className="products">
@@ -65,21 +49,10 @@ const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
               <img src={product.imageLink} />
               <button type="button" onClick={() => 
                {setProductEdit(product.id); history.push("/editproduct") }}>Edit</button>
-              <button type="button" onClick={async () => {const response = await destroyProduct(product.id)
-                setProductDelete(productDelete.filter(product => product.id !== response.id))}}>Delete</button>
+              <button type="button" onClick={() => handleSubmitDelete(product.id)}>Delete</button>
             </div>
           );
         })}
-        {/* {
-            users?.map((user) => {
-                return(
-                <div>
-                    <h1>Username: {user.username}</h1>
-                    <h1>Email: {user.email}</h1>
-                </div>
-                )
-            })
-        } */}
       </div>
     );
   }

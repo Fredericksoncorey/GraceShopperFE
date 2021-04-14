@@ -123,21 +123,18 @@ export const createCartItem = async (product) => {
   }
 };
 
-export const destroyProduct = async (product, id) => {
+export const destroyProduct = async (id) => {
   try {
     const response = await fetch(`http://localhost:3000/api/products/${id}`, {
       method: "DELETE",
-      body: JSON.stringify(product),
-
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
     })
-    // const data = await response.json();
-    // console.log(data);
     .then((response) => response.json())
     .catch(console.error);
+    console.log('hello',response)
     return response;
   } catch (error) {
     console.error(error);
@@ -262,17 +259,39 @@ export const updateProduct = async (product) => {
   }
 };
 
-export const getAllUsers = async () => {
+export const editProfile = async (user) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/products/update/${user.id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(user),
+  
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${getToken()}`,
+          },
+        }
+      );
+      const data = response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+export const getAllUsers = async (users) => {
     try {
       const response = await fetch("http://localhost:3000/api/users", {
         method: "GET",
+        body: JSON.stringify(users),
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", 
+            Authorization: `Bearer ${getToken()}`,
         },
       })
         .then((response) => response.json())
         .catch(console.error);
-      //console.log(response)
       return response;
     } catch (error) {
       throw error;

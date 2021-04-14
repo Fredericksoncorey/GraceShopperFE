@@ -9,3 +9,6 @@ export { default as EditProduct } from './EditProduct';
 export { default as UserCart } from './UserCart';
 export { default as GuestCart } from './GuestCart';
 export { default as Orders } from './Orders';
+export { default as Users } from './Users';
+export { default as EditProfile } from './EditProfile';
+

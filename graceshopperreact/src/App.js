@@ -13,7 +13,9 @@ import {
   EditProduct,
   UserCart,
   GuestCart,
-  Orders
+  Orders,
+  Users,
+  EditProfile,
 } from "./components"
 
 
@@ -22,6 +24,8 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(getToken());
   const [productEdit, setProductEdit] = useState('');
+  const [userEdit, setUserEdit] = useState('');
+
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
@@ -123,6 +127,18 @@ const App = () => {
             isAdmin={isAdmin}
             productEdit = {productEdit} 
             setProductEdit = {setProductEdit}/>
+          </Route>
+
+          <Route path='/users'>
+            <Users 
+            isAdmin={isAdmin}/>
+          </Route>
+
+          <Route path='/editprofile'>
+            <EditProfile 
+            loggedIn={loggedIn}
+            userEdit = {userEdit} 
+            setUserEdit = {setUserEdit}/>
           </Route>
           
           <Route path='/adminCreateProduct'>
