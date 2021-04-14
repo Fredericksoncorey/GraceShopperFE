@@ -66,7 +66,9 @@ const App = () => {
                         to='/'>Log Out</Link> : null}
         </div>
       </nav>
+     
       <main>
+        <aside className="empty-left"></aside>
         <Switch>
           <Route exact path= '/'>
              <Home loggedIn={loggedIn} currentUser={currentUser}/>
@@ -132,8 +134,11 @@ const App = () => {
           
 
         </Switch>  
+      <aside className="empty-right" ></aside>
       </main>
+    
     </Router>
+    
   );
 }
 

@@ -1,3 +1,387 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ body{
+    min-width: 850px
+} 
+.navBar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content:space-evenly;
+    align-items :baseline;
+    border: 2px ridge maroon;
+    background: gray;
+}
+
+.navBar *{
+    background: gray;
+}
+
+.navBar p {
+    font-size: 19px;
+    
+}
+
+
+.Link{
+    
+    background:whitesmoke;
+    color: black;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25px;
+    
+
+}
+
+img{
+    align-self: start;
+    width: 150px;
+    height: 150px;
+    object-fit: fill;
+    box-shadow: 3px 3px rgba(128, 128, 128, 0.705);
+}
+.empty-left{
+    margin: 0 auto;
+    flex: 1;
+    background-image:linear-gradient(black,white);
+    border: 2px ridge maroon;
+    border-top: none
+}
+
+.empty-right{
+    margin: 0 auto;
+    flex: 1;
+    background-image:linear-gradient(black,white);
+    border: 2px ridge maroon;
+    border-top: none
+    
+}
+main{
+    display: flex;
+    flex-flow: row;
+    justify-content:baseline;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.home *{
+    background: none;
+}
+
+
+.makePost *{
+    background: none;
+}
+
+.profile *{
+    background:none
+}
+
+.makeMessage *{
+    background: none;
+}
+
+h2{
+    text-align: center;
+    text-decoration: underline;
+}
+.home{
+    width: 200mm;
+    padding: 10px;
+    height: 89vh;
+    overflow-y: auto;
+    
+}
+
+
+
+
+
+
+.homeProductList{
+    display:flex;
+    flex-flow:row;
+    border-top: 2px solid maroon;
+    height: 150px;
+    padding: 10px;
+}
+
+
+.homeInfo{
+    display: flex;
+    flex-flow: column;
+    padding-left: 10px;
+    height:150px;
+    width:100%;
+    overflow-y:scroll;
+}
+
+
+
+.homeInfo p, b, h3{
+   margin: 0;
+}
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.288);
+  }
+
+  .search{
+      min-height: 72px;
+  }
+  .searchBar{
+    display: flex;
+    align-items: baseline;
+    font-size: 20px;
+    padding-top: 10px;
+  }
+
+  .searchBar label{
+      padding-right:3px;
+  }
+
+  .searchBar select{
+    width: 75%;
+  }
+
+  .searchSelected{
+    display: flex;
+    align-items: baseline;
+    font-size: 20px;
+    padding-top: 10px;
+  }
+
+  .searchSelected label{
+      padding-right:3px;
+  }
+
+  .searchSelected select{
+    width: 75%;
+  }
+
+  .searchSelected input{
+      width: 75%
+  }
+  
+
+
+
+
+  
+
+
+.searchInput{
+    background: whitesmoke;
+    height: 20px;
+    width: 200px;
+    border-radius: 25px;
+    margin-bottom: 2px;
+}
+
+.submitButton{
+    height: 26px;
+    border-radius: 25px;
+    background: whitesmoke;
+    font-weight: bold;
+
+}
+
+.deleteButton{
+    background: rgb(255, 120, 120);
+    margin: 10px;
+    border-radius: 25px;
+}
+
+.messageButton{
+    background: whitesmoke;
+    margin: 10px;
+    border-radius: 25px;
+}
+
+.editButton{
+    background: rgb(214, 252, 252);
+    border-radius: 25px;
+    border: 2px ridge rgb(136, 136, 136);
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 5px;
+}
+
+.postBy{
+    font-weight: bold;
+}
+
+
+
+.loginLink{
+    align-self: center;
+    color: rgb(2, 2, 141);
+    font-weight: bold;
+}
+
+.makePost{
+    width: 200mm;
+    height: 91vh;
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+}
+
+.makePost form{
+    align-self: center;
+    display: flex;
+    flex-flow: column;
+    padding: 20px;
+}
+
+.makePost input{
+    margin: 20px;
+    height: 30px;
+    width: 300px;
+    font-weight: bold;
+    background: whitesmoke;
+}
+
+.makePost form div{
+    display: flex;
+    flex-flow: column;
+}
+
+.makePost label{
+    font-weight: bold;
+    position: relative;
+    
+}
+
+.makePost h2{
+    text-align: center;
+    text-decoration: underline;
+}
+
+
+.profile{
+    width: 200mm;
+    padding: 10px;
+    min-height: 87.9vh;
+    max-height: 87.9vh;
+    display: flex; 
+    flex-flow: row
+}
+
+.userMessages{
+    border: 2px ridge maroon;
+    width: 100mm;
+    margin: 0 2px;
+    overflow-y: auto;
+}
+
+.userPosts{
+    border: 2px ridge maroon;
+    width: 100mm;
+    margin: 0 2px;
+    overflow-y: auto;
+}
+
+.myMessageTitle{
+    color: maroon;
+}
+
+.myPostTitle{   
+    color: maroon;
+    
+}
+ 
+.message{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    
+    
+}
+
+.message h2{
+    text-align: left;
+}
+
+
+
+.post{
+    border-top: 2px solid black;
+    border-bottom: 2px solid black
+}
+
+.post h2{
+    text-align: left;
+}
+
+.makeMessage{
+    width: 200mm;
+    height: 89.4vh;
+    display: flex;
+    flex-flow: column;
+    
+}
+
+.makeMessage form{
+    display: flex;
+    flex-flow: column;
+    position: relative;
+    top: 50px
+}
+
+.makeMessage input{
+    margin: 20px;
+    height: 30px;
+    width: 400px;
+    font-weight: bold;
+    background: whitesmoke;
+    align-self: center;
+}
+.makeMessage button{
+    align-self: center;
+    width: 100px
+}
+
+.popUpMessage{
+    display: inline;
+    padding: 10px;
+    width: 300px;
+    background: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    position: absolute;
+    bottom: 300px;
+    left: 300px;
+    border: 3px ridge maroon;
+    
+    
+    
+}
+
+.popUpMessage *{
+    background: none;
+}
+
+.viewButton{
+    background: rgb(203, 255, 199);
+    border-radius: 25px;
+    border: 2px ridge rgb(136, 136, 136);
+    text-decoration: none;
+    font-size: 14px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 5px;
+    margin: 0 5px
+}
+
 .products {
     display: flex;
     flex-direction: column;

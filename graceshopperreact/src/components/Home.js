@@ -18,7 +18,7 @@ const Home = ({loggedIn, currentUser}) => {
             averageRating = averageRating + reviews[i].rating
         }
         averageRating = averageRating/reviews.length
-        return averageRating
+        return `Rating: ${averageRating}`
     }
     
     const handleSubmit = async (event) => {
@@ -106,7 +106,7 @@ const Home = ({loggedIn, currentUser}) => {
            })
     } */
         return (
-        <div>
+        <div className="home">
             {/*         <input 
                     key="products"
                     value={keyword}
@@ -125,120 +125,130 @@ const Home = ({loggedIn, currentUser}) => {
                         )
                     })
                 } */}
-        <h3> Search:</h3>
-        <form>
-            <label>Search By...</label>
-            <select
-            name="select"
-            value={selectedSearch}
-            onChange={(e) => {
-                return setSelectedSearch(e.target.value)}}
-            >
-            <option value={false}>Select One</option>
-            <option value="artist">Artist</option>
-            <option value="genre">Genre</option>
-            <option value="title">Album Title</option>
-            </select> 
-            <button onClick={()=>{
-                setSearchResults(null)
-                setSelectedSearch(null)
-                setGenreSearch(null)
-                setTitleSearch(null)
-                setArtistSearch(null)
-            }}>Reset</button> 
-             
-        </form>
-
-        {selectedSearch==="artist" ? <form onSubmit={handleSubmit}>
-            
-            <label>Search By Artist:</label>
-            <input
-            name="artist"
-            placeholder="Please Input Desired Artist"
-            onChange={(e) => {
+        {/* <h3> Search:</h3> */}
+        <div className="search">
+            <form className="searchBar">
+                <label>Search By...</label>
+                <select
+                name="select"
+                value={selectedSearch}
+                onChange={(e) => {
+                    return setSelectedSearch(e.target.value)}}
+                >
+                <option value={false}>Select One</option>
+                <option value="artist">Artist</option>
+                <option value="genre">Genre</option>
+                <option value="title">Album Title</option>
+                </select> 
+                <button onClick={()=>{
+                    setSearchResults(null)
+                    setSelectedSearch(null)
+                    setGenreSearch(null)
+                    setTitleSearch(null)
+                    setArtistSearch(null)
+                }}>Reset</button> 
                 
-                setArtistSearch(e.target.value)}}
-            />
-            <button type="submit">submit</button>   
-        </form> : null }
+            </form>
 
-        { selectedSearch==="genre" ? <form onSubmit={handleSubmit}>
-            <label>Search By Genre:</label>
-            <select
-            name="genre"
-            value={genreSearch}
-            onChange={(e) => {
-                setArtistSearch(null)
-                setTitleSearch(null)
-                return setGenreSearch(e.target.value)}}
-            >
-            <option value={false}>Select One</option>
-            <option value="hardrock">Hard Rock</option>
-            <option value="country">Country</option>
-            </select> 
-            <button type="submit">submit</button> 
-             
-        </form> : null }
+            {selectedSearch==="artist" ? <form className="searchSelected" onSubmit={handleSubmit}>
+                
+            {/*  <label>Search By Artist:</label> */}
+                <input
+                name="artist"
+                placeholder="Please Input Desired Artist"
+                onChange={(e) => {
+                    
+                    setArtistSearch(e.target.value)}}
+                />
+                <button type="submit">Submit</button>   
+            </form> : null }
 
-        {selectedSearch==="title" ? <form onSubmit={handleSubmit}>
+            { selectedSearch==="genre" ? <form className="searchSelected" onSubmit={handleSubmit}>
+                {/* <label>Search By Genre:</label> */}
+                <select
+                name="genre"
+                value={genreSearch}
+                onChange={(e) => {
+                    setArtistSearch(null)
+                    setTitleSearch(null)
+                    return setGenreSearch(e.target.value)}}
+                >
+                <option value={false}>Select One</option>
+                <option value="hardrock">Hard Rock</option>
+                <option value="country">Country</option>
+                </select> 
+                <button type="submit">Submit</button> 
+                
+            </form> : null }
+
+            {selectedSearch==="title" ? <form className="searchSelected" onSubmit={handleSubmit}>
+                
+                {/* <label>Search By Album:</label> */}
+                <input
+                name="title"
+                placeholder="Please Input Desired Album"
+                onChange={(e) => {
+                    setGenreSearch(null)
+                    setArtistSearch(null)
+                    setTitleSearch(e.target.value)}}
+                />
+                <button type="submit">Submit</button>   
+            </form> : null} 
             
-            <label>Search By Album:</label>
-            <input
-            name="title"
-            placeholder="Please Input Desired Album"
-            onChange={(e) => {
-                setGenreSearch(null)
-                setArtistSearch(null)
-                setTitleSearch(e.target.value)}}
-            />
-            <button type="submit">submit</button>   
-        </form> : null} 
 
-
-
+        </div>
 
         
-        <h1>hello</h1>
-        <button onClick={()=>{console.log(currentUser)}}>LogginCheck</button>
             {!searchResults ? allProducts?.map(product => {
                 
                 return (
-                    <div>
-                        <h3>Title: {product.title}</h3>
-                        <p>Rating: {`${averageRating(product)}/5`}</p>
-                        <p>{product.desciption}</p>
-                        <p>{product.artist}</p>
-                        <p>{product.genre}</p>
-                        {product.reviews ? product.reviews.map(review => { //------I was here!!!
-                            return(
-                            <p>{review.review}</p>)
-                        }): null}
-                        <p>{product.releaseDate.slice(0,10)}</p>
-                        <p>{product.price}</p>
-                        <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
+                    <div className="homeProductList" >
+                        <div><img alt="imageLink" src={product.imageLink}/></div>
+                        <div className="homeInfo">
+                            <div className="info">
+                                 <h3>Title: {product.title}</h3>
+                                {product.reviews ? <p>{`${averageRating(product)}/5`}</p> : <p>Not Yet Rated</p>} {/* //--- Figure out conditionals */}
+                                <p>{product.artist}</p>
+                                <p>{product.genre}</p>
+                                <p>{product.description}</p>
+                                <p>{product.releaseDate.slice(0,10)}</p>
+                                <p>{product.price}</p>
+                            </div>
+                            
+                           
+                            {product.reviews ? product.reviews.map(review => { //------I was here!!!
+                                return(<>
+                                <b>{`${review.rating}/5`}</b>
+                                <p>{review.review}</p> <p>by {review.byUser}</p>
+                            </>)}): null}
+                            
+                            <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
+                        </div>
                         
-                        <img alt="imageLink" src={product.imageLink}/>
                     </div>
                 )
             })
             
             :  searchResults?.map(product => {
                 return (
-                    <div>
-                        <h3>Title: {product.title}</h3>
-                        {product.reviews ? <p>Rating: {averageRating(product)}</p> : <p>Not Yet Rated</p>}
-                        <p>{product.desciption}</p>
-                        <p>{product.artist}</p>
-                        <p>{product.genre}</p>
-                        {product.reviews ? product.reviews.map(review => { //------I was here!!!
-                            return(
-                            <p>{review.review}</p>)
-                        }): null}
-                        <p>{product.releaseDate.slice(0,10)}</p>
-                        <p>{product.price}</p>
-                        <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
+                    <div className="homeProductList" >
+                        <div><img alt="imageLink" src={product.imageLink}/></div>
+                        <div classname="homeInfo">
+                            <h3>Title: {product.title}</h3>
+                            {product.reviews ? <p>Rating: {averageRating(product)}</p> : <p>Not Yet Rated</p>} {/* //--- Figure out conditionals */}
+                            <p>{product.description}</p>
+                            <p>{product.artist}</p>
+                            <p>{product.genre}</p>
+                            {product.reviews ? product.reviews.map(review => { //------I was here!!!
+                                return(<>
+                                <b>{`${review.rating}/5`}</b>
+                                <p>{review.review}</p> <p>by {review.byUser}</p>
+                            </>)}): null}
+                            <p>{product.releaseDate.slice(0,10)}</p>
+                            <p>{product.price}</p>
+                            <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
+                        </div>
                         
-                        <img alt="imageLink" src={product.imageLink}/>
                     </div>
                 )
             })
