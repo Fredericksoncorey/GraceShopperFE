@@ -10,7 +10,10 @@ import {
   AdminCreateProduct,
   Products,
   Home,
-  Cart
+  EditProduct,
+  UserCart,
+  GuestCart,
+  Orders
 } from "./components"
 
 
@@ -18,13 +21,14 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(getToken());
-  
+  const [productEdit, setProductEdit] = useState('');
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     if (loggedIn) {
         try {
             const data = await getUserInfo(loggedIn);
-            console.log(data)
+            //console.log(data)
             setCurrentUser(data);
             if(data.isAdmin){
               setIsAdmin(true)
@@ -75,6 +79,13 @@ const App = () => {
               setCurrentUser={setCurrentUser}
             />          
           </Route>
+
+          <Route path='/EditProduct'>
+          <EditProduct 
+              productEdit = {productEdit} 
+              setProductEdit = {setProductEdit}
+            />          
+          </Route>
           
           <Route path='/Register'>
             <Register 
@@ -85,10 +96,11 @@ const App = () => {
           </Route>
 
           <Route path='/cart'>
-            <Cart
+            {loggedIn ? <UserCart
             loggedIn={loggedIn}
             currentUser={currentUser}
             />
+            : <GuestCart/>}
           </Route>
           
           <Route path='/products'>
@@ -98,12 +110,19 @@ const App = () => {
             />
           </Route>
 
+          <Route path='/orders'>
+            <Orders currentUser={currentUser}/>
+          </Route>
+
           <Route path='/profile'>
             <Profile />
           </Route>
           
           <Route path='/admin'>
-            <Admin isAdmin={isAdmin}/>
+            <Admin 
+            isAdmin={isAdmin}
+            productEdit = {productEdit} 
+            setProductEdit = {setProductEdit}/>
           </Route>
           
           <Route path='/adminCreateProduct'>

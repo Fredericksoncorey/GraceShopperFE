@@ -41,7 +41,7 @@ const Home = ({loggedIn, currentUser}) => {
 
 
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
     useEffect(() => {console.log(selectedSearch)}, [selectedSearch]);
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -139,7 +139,13 @@ const Home = ({loggedIn, currentUser}) => {
             <option value="genre">Genre</option>
             <option value="title">Album Title</option>
             </select> 
-            
+            <button onClick={()=>{
+                setSearchResults(null)
+                setSelectedSearch(null)
+                setGenreSearch(null)
+                setTitleSearch(null)
+                setArtistSearch(null)
+            }}>Reset</button> 
              
         </form>
 
@@ -150,8 +156,7 @@ const Home = ({loggedIn, currentUser}) => {
             name="artist"
             placeholder="Please Input Desired Artist"
             onChange={(e) => {
-                setGenreSearch(null)
-                setTitleSearch(null)
+                
                 setArtistSearch(e.target.value)}}
             />
             <button type="submit">submit</button>   
@@ -204,12 +209,10 @@ const Home = ({loggedIn, currentUser}) => {
                         <p>{product.desciption}</p>
                         <p>{product.artist}</p>
                         <p>{product.genre}</p>
-                        {product.reviews.map(review => { //------I was here!!!
-                            return(<p>{review.review}</p> ) // Add created by User, fetch user by username.
-                            //also individual rating
-                            
-                           
-                        })}
+                        {product.reviews ? product.reviews.map(review => { //------I was here!!!
+                            return(
+                            <p>{review.review}</p>)
+                        }): null}
                         <p>{product.releaseDate.slice(0,10)}</p>
                         <p>{product.price}</p>
                         <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
@@ -223,9 +226,14 @@ const Home = ({loggedIn, currentUser}) => {
                 return (
                     <div>
                         <h3>Title: {product.title}</h3>
+                        {product.reviews ? <p>Rating: {averageRating(product)}</p> : <p>Not Yet Rated</p>}
                         <p>{product.desciption}</p>
                         <p>{product.artist}</p>
                         <p>{product.genre}</p>
+                        {product.reviews ? product.reviews.map(review => { //------I was here!!!
+                            return(
+                            <p>{review.review}</p>)
+                        }): null}
                         <p>{product.releaseDate.slice(0,10)}</p>
                         <p>{product.price}</p>
                         <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
