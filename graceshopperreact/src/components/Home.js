@@ -9,6 +9,8 @@ const Home = ({loggedIn, currentUser}) => {
     const [searchFailed, setSearchFailed] = useState(false)
     const [searchResults, setSearchResults] = useState()
     const [selectedSearch, setSelectedSearch] = useState()
+    const [showReview, setShowReview] = useState(false)
+    const [showDescription, setShowDescription] = useState(false)
     
      
     const averageRating = ({reviews}) => {
@@ -18,12 +20,16 @@ const Home = ({loggedIn, currentUser}) => {
             averageRating = averageRating + reviews[i].rating
         }
         averageRating = averageRating/reviews.length
-        return `Rating: ${averageRating}`
-    }
+        if(isNaN(averageRating)){
+            return `This product has not been rated yet`
+        }
+        return `Rating: ${averageRating}/5`
+    } 
     
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
+            setShowReview(false)
             if(artistSearch){
                 setSearchResults(await searchProductsByArtist(artistSearch))
             }else if(genreSearch){
@@ -141,6 +147,7 @@ const Home = ({loggedIn, currentUser}) => {
                 <option value="title">Album Title</option>
                 </select> 
                 <button onClick={()=>{
+                    setShowReview(false)
                     setSearchResults(null)
                     setSelectedSearch(null)
                     setGenreSearch(null)
@@ -199,7 +206,7 @@ const Home = ({loggedIn, currentUser}) => {
         </div>
 
         
-            {!searchResults ? allProducts?.map(product => {
+            {!searchResults ? allProducts?.map((product,key) => {
                 
                 return (
                     <div className="homeProductList" >
@@ -207,50 +214,72 @@ const Home = ({loggedIn, currentUser}) => {
                         <div className="homeInfo">
                             <div className="info">
                                  <h3>Title: {product.title}</h3>
-                                {product.reviews ? <p>{`${averageRating(product)}/5`}</p> : <p>Not Yet Rated</p>} {/* //--- Figure out conditionals */}
+                                <p>{averageRating(product)}</p>
                                 <p>{product.artist}</p>
                                 <p>{product.genre}</p>
                                 <p>{product.description}</p>
                                 <p>{product.releaseDate.slice(0,10)}</p>
                                 <p>{product.price}</p>
+                                <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
+                                {product.reviews.length && showReview !== key ? <button onClick ={()=>{
+                                    setShowReview(key)
+                                    }}>Show Reviews</button>: null}
+
                             </div>
-                            
-                           
-                            {product.reviews ? product.reviews.map(review => { //------I was here!!!
-                                return(<>
-                                <b>{`${review.rating}/5`}</b>
-                                <p>{review.review}</p> <p>by {review.byUser}</p>
-                            </>)}): null}
-                            
-                            <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
-                        </div>
+                            <div className="feature">
+                    
+                        
+                            {showReview===key ? product.reviews.map(review => { 
+                                                return(<>
+                                                    <b>{`${review.rating}/5`}</b>
+                                                    <p>{review.review}</p> <p>by {review.byUser}</p>
+                                                </>)
+                                            }):null}
+                             
+                            </div>
                         
                     </div>
-                )
+                </div>)
             })
             
-            :  searchResults?.map(product => {
+            :  searchResults?.map((product,key) => {
                 return (
                     <div className="homeProductList" >
                         <div><img alt="imageLink" src={product.imageLink}/></div>
-                        <div classname="homeInfo">
-                            <h3>Title: {product.title}</h3>
-                            {product.reviews ? <p>Rating: {averageRating(product)}</p> : <p>Not Yet Rated</p>} {/* //--- Figure out conditionals */}
-                            <p>{product.description}</p>
-                            <p>{product.artist}</p>
-                            <p>{product.genre}</p>
-                            {product.reviews ? product.reviews.map(review => { //------I was here!!!
-                                return(<>
-                                <b>{`${review.rating}/5`}</b>
-                                <p>{review.review}</p> <p>by {review.byUser}</p>
-                            </>)}): null}
-                            <p>{product.releaseDate.slice(0,10)}</p>
-                            <p>{product.price}</p>
-                            <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
+                        <div className="homeInfo">
+                            <div className="info">
+                                 <h3>Title: {product.title}</h3>
+                                <p>{averageRating(product)}</p>
+                                <p>{product.artist}</p>
+                                <p>{product.genre}</p>
+                                <p>{product.description}</p>
+                                <p>{product.releaseDate.slice(0,10)}</p>
+                                <p>{product.price}</p>
+                                <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
+                                
+                            </div>
+                            <div className="reviews">
+                                {product.reviews.length   ? <button onClick ={()=>{
+                                    setShowReview(key)
+                                    }}>Show Reviews</button>: null}
+                                {product.reviews ? product.reviews.map(review => { 
+                                    return(<>
+                                        
+                                            {/* //------I was here!!! */}
+                                            {showReview===key ? 
+                                                <div classname='review'>
+                                                    <b>{`${review.rating}/5`}</b>
+                                                    <p>{review.review}</p> <p>by {review.byUser}</p>
+                                                </div>
+                                            :null
+                                            }
+                                        </>)}): null}
+                            
+                            
                         </div>
                         
                     </div>
-                )
+                </div>)
             })
                 
             }

@@ -2,9 +2,11 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
- body{
-    min-width: 850px
+ html{
+    min-width: 850px;
+    
 } 
+
 .navBar {
     display: flex;
     flex-flow: row wrap;
@@ -47,7 +49,8 @@ img{
     flex: 1;
     background-image:linear-gradient(black,white);
     border: 2px ridge maroon;
-    border-top: none
+    border-top: none;
+    
 }
 
 .empty-right{
@@ -55,7 +58,8 @@ img{
     flex: 1;
     background-image:linear-gradient(black,white);
     border: 2px ridge maroon;
-    border-top: none
+    border-top: none;
+    
     
 }
 main{
@@ -64,6 +68,7 @@ main{
     justify-content:baseline;
     justify-items: stretch;
     align-items: stretch;
+    
 }
 
 .home *{
@@ -90,7 +95,7 @@ h2{
 .home{
     width: 200mm;
     padding: 10px;
-    height: 89vh;
+    height: 83vh; 
     overflow-y: auto;
     
 }
@@ -102,7 +107,6 @@ h2{
 
 .homeProductList{
     display:flex;
-    flex-flow:row;
     border-top: 2px solid maroon;
     height: 150px;
     padding: 10px;
@@ -111,17 +115,32 @@ h2{
 
 .homeInfo{
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     padding-left: 10px;
     height:150px;
     width:100%;
     overflow-y:scroll;
+    
+}
+
+.info{
+    width:50vh
+}
+
+.reviews{
+    
+    width:50vh  
+}
+
+.review p, b {
+    padding: 10px;
+    
 }
 
 
 
 .homeInfo p, b, h3{
-   margin: 0;
+   margin: auto;
 }
 ::-webkit-scrollbar {
     -webkit-appearance: none;
