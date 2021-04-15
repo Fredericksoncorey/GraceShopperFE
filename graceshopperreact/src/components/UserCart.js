@@ -28,6 +28,10 @@ const UserCart = ({loggedIn, currentUser}) =>{
                 //alert("Item has been removed")
                 //console.log(response)
             }}>Remove Item From Cart</button>
+            {/* <form>
+            <label>Quantity:</label>
+            <input type="text" onChange={(event) => setUserCart(userCart.item.quantity = event.target.value)} placeholder={userCart.item.quantity}/>
+            </form> */}
             <hr></hr>
 
             </div>
@@ -37,7 +41,8 @@ const UserCart = ({loggedIn, currentUser}) =>{
             //console.log('button clicked')
             alert('Your order has been placed, Thank you!')
             userCart.map(async (item) => {
-                const responseOrder = await createOrder(currentUser.id, item.product, 1)
+                console.log('item: ', item)
+                const responseOrder = await createOrder(currentUser.id, null, item.product, 1)
                 const response = await deleteCartItem(item.id)
                 //setUserCart(userCart.filter(cartItem => cartItem.id != response.id))
             })

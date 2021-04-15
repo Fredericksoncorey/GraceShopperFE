@@ -35,7 +35,9 @@ const Products = ({loggedIn, currentUser}) => {
                         productToAdd.userId = currentUser.id
                         productToAdd.productId = product.id
                         productToAdd.quantity = 1
+                        //console.log(productToAdd)
                         const response = await createCartItem(productToAdd)
+                        //console.log(response)
                     } else if (!loggedIn){
                         if (localStorage.getItem('guestCartItems')) {
                             //console.log('in if')
