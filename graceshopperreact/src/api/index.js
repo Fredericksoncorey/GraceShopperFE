@@ -108,7 +108,7 @@ export const createCartItem = async (product) => {
   console.log("createCartItem: ", product);
   try {
     const response = await fetch(`http://localhost:3000/api/cartItems`, {
-      method: "PATCH",
+      method: "POST",
       body: JSON.stringify(product),
 
       headers: {
@@ -277,9 +277,10 @@ export const getAllUsers = async () => {
     }
 }
 
-export const createOrder = async (userId, productId, quantity) => {
+export const createOrder = async (userId, guestEmail, productId, quantity) => {
     const order = {
         userId,
+        guestEmail,
         productId,
         quantity
     }
@@ -317,4 +318,28 @@ export const fetchUserOrders = async (userId) => {
     } catch(error){
         throw error
     }
+}
+
+export const createGuestOrder = async (userId, guestEmail, productId, quantity) => {
+  const order = {
+      userId,
+      guestEmail,
+      productId,
+      quantity
+  }
+  try {
+      const response = await fetch('http://localhost:3000/api/orders', {
+          method: "POST",
+          body: JSON.stringify(order),
+          
+          headers: {
+              "Content-Type": "application/json"
+          }
+      }).then(response => response.json())
+          .catch(console.error);
+          //console.log(response)
+          return response
+  } catch (error) {
+      throw error
+  }
 }

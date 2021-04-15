@@ -1,4 +1,5 @@
 import {React, useEffect, useState} from 'react';
+import {createGuestOrder} from "../api"
 
 let cart = []
 let newCart = ''
@@ -11,6 +12,7 @@ let newCart = ''
 
 const GuestCart = () => {
     const [guestCart, setGuestCart] = useState(cart);
+    const [guestEmail, setGuestEmail] = useState('')
 
     useEffect(async () => {
     localStorage.getItem('guestCartItems')
@@ -49,9 +51,15 @@ const GuestCart = () => {
                 name="email"
                 type = "email"
                 required
-                onChange={(e) => ({})}
+                onChange={(e) => setGuestEmail(e.target.value)}
                 />
-            <button>Click To Checkout</button>
+            <button onClick={async() => {
+                alert('Your order has been placed, Thank you!')
+                guestCart.map(async (item) => {
+                    const responseOrder = await createGuestOrder(null, guestEmail, item, 1)
+                    localStorage.setItem('guestCartItems', "[]")
+                })
+            }}>Click To Checkout</button>
             </form>
             </div>
         ) 

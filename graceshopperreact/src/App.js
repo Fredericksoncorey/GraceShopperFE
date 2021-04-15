@@ -48,7 +48,7 @@ const App = () => {
           <Link className="Link" to= '/'>Home</Link>
           <Link className="Link" to= '/products'>Shop</Link>
           <Link className="Link" to= '/cart'>Cart</Link>
-          <Link className="Link" to= '/orders'>Orders</Link>
+          {loggedIn ? <Link className="Link" to= '/orders'>Orders</Link> : null}
           {!loggedIn ? <Link className="Link" to= '/login'>Login</Link> : null}
           {!loggedIn ?<Link className="Link" to= '/register'>Sign Up</Link> : null}
           {isAdmin ? <Link className="Link" to= '/admin'>Admin Link</Link>: null}
