@@ -119,7 +119,8 @@ const App = () => {
           </Route>
 
           <Route path='/profile'>
-            <Profile />
+            <Profile 
+            loggedIn={loggedIn}/>
           </Route>
           
           <Route path='/admin'>

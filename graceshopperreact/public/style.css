@@ -1,4 +1,4 @@
-.products {
+.products, .users {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,4 +6,23 @@
     margin: 20px;
     padding: 10px;
     border-radius: 4px;
+}
+.Admin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+}
+.link{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+.listheader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
 }

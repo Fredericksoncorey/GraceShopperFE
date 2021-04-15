@@ -339,3 +339,37 @@ export const fetchUserOrders = async (userId) => {
         throw error
     }
 }
+
+export const deleteUser = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      .then((response) => response.json())
+      .catch(console.error);
+      console.log('hello',response)
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  export const getUser = async (token) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/users/info`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = response.json();
+      //console.log(data)
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  };

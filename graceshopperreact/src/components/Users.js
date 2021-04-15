@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { getAllUsers} from "../api";
+import { deleteUser, getAllUsers} from "../api";
 
   const Users = ({isAdmin}) =>{
       const [users, setUsers] = useState([])
@@ -13,17 +13,31 @@ import { getAllUsers} from "../api";
       console.log(error);
     }
   }, [])
+
+  const handleSubmitDelete = async (deleteUserId) => { 
+    try {
+      const response = await deleteUser(deleteUserId);
+        setUsers(users.filter(user => user.id !== deleteUserId))
+        console.log(response)
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (<div>
+      <h1 className="listheader">List of all users:</h1>
+      <div className="users">
             {users?.map(user => {
                 return(
                 <div>
-                    <h1>Username: {user.username}</h1>
-                    <h1>Email: {user.email}</h1>
-                    <button type="button" >Delete</button>
+                    <p>Username: {user.username}</p>
+                    <p>Email: {user.email}</p>
+                    <button type="button" onClick={() => handleSubmitDelete(user.id)}>Delete</button>
                 </div>
                 )
             })}
-            </div>
+        </div>
+        </div>
   )
 }
 
