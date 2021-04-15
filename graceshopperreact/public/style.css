@@ -40,11 +40,12 @@
 
 img{
     align-self: start;
-    width: 150px;
-    height: 150px;
+    width: 172px;
+    height: 172px;
     object-fit: fill;
     box-shadow: 3px 3px rgba(128, 128, 128, 0.705);
 }
+
 .empty-left{
     margin: 0 auto;
     flex: 1;
@@ -109,7 +110,7 @@ h2{
 .homeProductList{
     display:flex;
     border-top: 2px solid maroon;
-    height: 150px;
+    height: 172px;
     padding: 10px;
 }
 
@@ -118,9 +119,9 @@ h2{
     display: flex;
     flex-flow: row;
     padding-left: 10px;
-    height:150px;
-    width:100%;
-    overflow-y:scroll;
+    height:172px;
+    width:76%;
+    
     
 }
 
@@ -128,12 +129,15 @@ h2{
     width:50vh
 }
 
-.reviews{
-    
-    width:50vh  
+.feature{
+    display: flex;
+    flex-flow: column;
+    border-left:1px solid rgba(0, 0, 0, 0.288);
+    width:500px;
+    overflow-y:scroll;  
 }
 
-.review p, b {
+.feature p, u {
     padding: 10px;
     
 }

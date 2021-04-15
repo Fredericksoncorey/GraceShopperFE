@@ -397,3 +397,15 @@ export const createGuestOrder = async (userId, guestEmail, productId, quantity) 
       throw error
   }
 }
+
+export const getGenreList = async () => {
+  try {
+      const response = await fetch(`http://localhost:3000/api/products/genreList`
+  )
+      const data = await response.json()
+      //console.log(data)
+      return data
+  } catch (error) {
+      console.error(error)
+  }
+}

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
 import {getToken, clearToken} from "./auth"
-import {getUserInfo} from "./api"
+import {getUserInfo, getGenreList, getUser} from "./api"
 import {
   Admin,
   Login,
@@ -19,14 +19,26 @@ import {
 } from "./components"
 
 
+
+
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [currentUser, setCurrentUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(getToken());
   const [productEdit, setProductEdit] = useState('');
   const [userEdit, setUserEdit] = useState('');
+  const [genreList, setGenreList]= useState();
 
-
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    try {
+      const response = await getGenreList()
+      setGenreList(response)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     if (loggedIn) {
@@ -74,8 +86,14 @@ const App = () => {
       <main>
         <aside className="empty-left"></aside>
         <Switch>
+          
           <Route exact path= '/'>
-             <Home loggedIn={loggedIn} currentUser={currentUser}/>
+             <Home 
+             loggedIn={loggedIn} 
+             currentUser={currentUser}
+             genreList={genreList} 
+             />
+
           </Route>         
           
           <Route path='/Login'>
