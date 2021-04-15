@@ -24,25 +24,38 @@ const GuestCart = () => {
         return (<h2>Your Guest Cart is Empty.</h2>)
     } else {
         return (
-        guestCart.map((productId, idx) => {
-            console.log(guestCart)
-            return (
-                <div>
-                    <p>Product Id: {productId}</p>
-                    <button onClick={()=> { 
-                        //console.log(idx)
-                        cart.splice(idx, 1)
-                        cart = [...cart]
-                        //console.log(cart)
-                        newCart = JSON.stringify(cart)
-                        localStorage.setItem('guestCartItems', newCart)
-                        setGuestCart(cart)
-                }}>Remove Item From Cart</button>
-                <hr></hr>
-                </div>
-        )
-    })
-)}
+            <div>{
+            guestCart.map((productId, idx) => {
+                console.log(guestCart)
+                return (
+                    <div>
+                        <p>Product Id: {productId}</p>
+                        <button onClick={()=> { 
+                            //console.log(idx)
+                            cart.splice(idx, 1)
+                            cart = [...cart]
+                            //console.log(cart)
+                            newCart = JSON.stringify(cart)
+                            localStorage.setItem('guestCartItems', newCart)
+                            setGuestCart(cart)
+                        }}>Remove Item From Cart</button>
+                    <hr></hr>
+                    </div>
+                )
+            })}
+            <form>
+            <label for ="email" >Email:</label>
+                <input
+                name="email"
+                type = "email"
+                required
+                onChange={(e) => ({})}
+                />
+            <button>Click To Checkout</button>
+            </form>
+            </div>
+        ) 
+    }
 }
 
 export default GuestCart
