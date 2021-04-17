@@ -106,7 +106,7 @@ export const getUserInfo = async (token) => {
 };
 
 export const createCartItem = async (product) => {
-  console.log("createCartItem: ", product);
+  //console.log("createCartItem: ", product);
   try {
     const response = await fetch(`http://localhost:3000/api/cartItems`, {
       method: "POST",
@@ -410,3 +410,17 @@ export const getGenreList = async () => {
       console.error(error)
   }
 }
+
+export const updateItemQuantity= async (id, quantity) => {
+  console.log('id: ', id, 'quantity: ', quantity)
+  try {
+    const response = await fetch(`http://localhost:3000/api/cartItems/${id}/${quantity}`, {
+        method: "PATCH"
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};

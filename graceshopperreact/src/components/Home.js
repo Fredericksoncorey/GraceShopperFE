@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from 'react';
-import { fetchProducts, getGenreList, searchProductsByArtist, searchProductsByGenre, searchProductsByTitle } from '../api'
+import { fetchProducts, getGenreList, searchProductsByArtist, searchProductsByGenre, searchProductsByTitle, createCartItem } from '../api'
 import ReactHtmlParser from 'react-html-parser';
 
 const Home = ({loggedIn, currentUser, genreList}) => {
@@ -155,7 +155,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
 
         
             {!searchResults ? allProducts?.map((product,key) => {
-                
+                let guestCart = [] 
                 return (
                     <div className="homeProductList" >
                         {product.imageLink===null ? 
@@ -182,7 +182,25 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                                         setShowDescription(null)
                                         setShowReview(key)
                                     }}>Show Reviews</button>: null}
-                                    
+                                    <button value={product.id} onClick={async()=>{
+                                if (loggedIn) {
+                                    let productToAdd = {}
+                                    productToAdd.userId = currentUser.id
+                                    productToAdd.productId = product.id
+                                    productToAdd.quantity = 1
+                                    const response = await createCartItem(productToAdd)
+                                } else if (!loggedIn){
+                                    if (localStorage.getItem('guestCartItems')) {
+                                    guestCart = JSON.parse(localStorage.getItem('guestCartItems'))
+                                    guestCart.push(product.id)
+                                    const newCart = JSON.stringify(guestCart)
+                                    localStorage.setItem('guestCartItems', newCart)
+                                    } else {
+                                        guestCart = [product.id]
+                                        let newCart = JSON.stringify(guestCart)
+                                        localStorage.setItem('guestCartItems', newCart)}
+                                }
+                }}>Add ProductId to Cart</button>
 
                             </div>
                             <div className="feature">
