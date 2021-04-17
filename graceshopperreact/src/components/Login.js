@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { storeToken } from "../auth";
+import { storeToken, loggedInUserId } from "../auth";
 import {Redirect} from "react-router-dom"
 import {logIn} from '../api'
 const Login = ({setCurrentUser, loggedIn, setLoggedIn }) => {
@@ -25,6 +25,8 @@ const Login = ({setCurrentUser, loggedIn, setLoggedIn }) => {
           alert(response.message);
           setLoggedIn(response.token)
           storeToken(response.token);
+          loggedInUserId(response.user.id)
+          // setCurrentUser(response);
         }
     } catch (error) {
         

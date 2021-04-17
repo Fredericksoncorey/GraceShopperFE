@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
-import {getToken, clearToken} from "./auth"
+import {getToken, clearToken, getId} from "./auth"
 import {getUserInfo} from "./api"
 import {
   Admin,
@@ -25,6 +25,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(getToken());
   const [productEdit, setProductEdit] = useState('');
   const [userEdit, setUserEdit] = useState('');
+  const [id, setId] = useState('');
 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,7 +33,9 @@ const App = () => {
     if (loggedIn) {
         try {
             const data = await getUserInfo(loggedIn);
-            //console.log(data)
+            console.log(data)
+            const setUserId = await getId()
+            setId(setUserId)
             setCurrentUser(data);
             if(data.isAdmin){
               setIsAdmin(true)
@@ -122,7 +125,9 @@ const App = () => {
 
           <Route path='/profile'>
             <Profile 
-            loggedIn={loggedIn}/>
+            id={id}
+            loggedIn={loggedIn}
+            currentUser={currentUser}/>
           </Route>
           
           <Route path='/admin'>
