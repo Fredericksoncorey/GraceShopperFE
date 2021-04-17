@@ -60,7 +60,7 @@ const App = () => {
   return (
     <Router>
       <nav className="navBar">
-        <h1>Grace-Shopper</h1>
+        <h1>For The Record</h1>
         <div>
           <Link className="Link" to= '/'>Home</Link>
           <Link className="Link" to= '/products'>Shop</Link>

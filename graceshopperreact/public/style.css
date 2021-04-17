@@ -40,8 +40,8 @@
 
 img{
     align-self: start;
-    width: 172px;
-    height: 172px;
+    width: 189px;
+    height: 189px;
     object-fit: fill;
     box-shadow: 3px 3px rgba(128, 128, 128, 0.705);
 }
@@ -110,7 +110,7 @@ h2{
 .homeProductList {
     display:flex;
     border-top: 2px solid maroon;
-    height: 172px;
+    height: 189px;
     padding: 10px;
 }
 
