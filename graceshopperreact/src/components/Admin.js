@@ -20,6 +20,8 @@ const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
     }
   }, []);
 
+  useEffect(() =>{}, [products])
+
 
   
   const handleSubmitDelete = async (deleteProductId) => { 

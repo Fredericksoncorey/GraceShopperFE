@@ -1,5 +1,6 @@
 import {React, useEffect, useState} from 'react';
 import { fetchProducts, getGenreList, searchProductsByArtist, searchProductsByGenre, searchProductsByTitle } from '../api'
+import ReactHtmlParser from 'react-html-parser';
 
 const Home = ({loggedIn, currentUser, genreList}) => {
     const [allProducts, setAllProducts] = useState([]);
@@ -12,7 +13,12 @@ const Home = ({loggedIn, currentUser, genreList}) => {
     const [showReview, setShowReview] = useState(false)
     const [showDescription, setShowDescription] = useState(false)
     
-     
+    /* const convertToElement = (str) => {
+        let dom = document.createElement('div');
+        dom.innerHTML = str;
+        return dom;
+    };  */
+    
     const averageRating = ({reviews}) => {
         let averageRating = 0
         console.log(reviews)
@@ -182,8 +188,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                             <div className="feature">
                             
                             {showDescription===key ?
-                                <p>{product.description}</p>
-                            :null}
+                                ReactHtmlParser(product.description) :null}
                             
                             {showReview===key ? 
                                 product.reviews.map(review => { 

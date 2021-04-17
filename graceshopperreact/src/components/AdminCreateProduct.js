@@ -1,13 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router';
 import {adminCreateProduct} from '../api';
-
+import Popout from 'react-popout'
 
 const AdminCreateProduct = ({isAdmin}) =>{
     const [product, setProduct] = useState({imageLink: null})
-    const [finished, setFinished] = useState(false)
+    const [finished, setFinished] = useState(false);
+    const [popOut, setPopOut] = useState(null)
+
+    useEffect(() => {}, [popOut])
 
 
+    const closeHandle = () => {
+        setPopOut(false)
+    }
+    
     const handleSubmit = async (evt)=>{
         evt.preventDefault();
         const imageLink = evt.target[1].value
@@ -62,13 +69,13 @@ const AdminCreateProduct = ({isAdmin}) =>{
                         placeholder="Genre" 
                         onChange={(e) => setProduct({ ...product, genre: e.target.value })} />
 
-                    <label>Release Date:</label>
+                    <label>Release Date: "yyyy/mm/dd" </label>
                     <input 
                         required 
                         placeholder=""
                         onChange={(e) => setProduct({ ...product, releaseDate: e.target.value })} />
 
-                    <label>Description:</label>
+                    <label>Description: Please copy<u onClick={()=>{setPopOut(true); console.log(popOut)}}>Template</u>for form. </label>
                     <input required onChange={(e) => setProduct({ ...product, description: e.target.value })} />
 
                     <label>Price:</label>
@@ -79,6 +86,27 @@ const AdminCreateProduct = ({isAdmin}) =>{
 
                     <button type="submit">submit</button>
             </form>
+            
+            <button onClick={()=>{console.log(popOut)}}></button>
+            {popOut ? <Popout onClosing={closeHandle} title='Description Template'>
+                <div> 
+                <p>{`<b>Side one</b>`}</p>
+                <p>{`<ol>`}</p>
+            <p>{`<li>SONG 1</li>`}</p>
+            <p>{`<li>SONG 2</li>`}</p>
+            <p>{`<li>SONG 3</li>`}</p>
+            <p>{`<li>SONG 4</li>`}</p>
+            <p>{`</ol>` }</p>
+            <p>{`<b>Side two</b> `}</p>
+            <p>{`<ol>`}</p>
+            <p>{ `<li>SONG 1</li>`}</p>
+            <p>{`<li>SONG 2</li>`} </p>
+            <p>{`<li>SONG 3</li>`} </p>
+            <p>{`<li>SONG 4</li>`} </p>
+            <p>{`<li>SONG 5</li>` }</p>
+            <p>{`</ol>`}</p>
+            </div>
+            </Popout>: null}
             </div>
         )
     }
