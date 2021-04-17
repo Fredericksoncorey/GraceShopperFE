@@ -30,31 +30,21 @@ const Products = ({loggedIn, currentUser}) => {
                 <div>{product.imageLink}</div>
                 <img src={product.imageLink} height="200" with ="200"/>
                 <button value={product.id} onClick={async()=>{
-                    //const = this.getAttribute('value')
                     if (loggedIn) {
                         productToAdd.userId = currentUser.id
                         productToAdd.productId = product.id
                         productToAdd.quantity = 1
-                        //console.log(productToAdd)
                         const response = await createCartItem(productToAdd)
-                        //console.log(response)
                     } else if (!loggedIn){
                         if (localStorage.getItem('guestCartItems')) {
-                            //console.log('in if')
                         guestCart = JSON.parse(localStorage.getItem('guestCartItems'))
-                        //console.log('guest cart: ', guestCart)
                         guestCart.push(product.id)
                         const newCart = JSON.stringify(guestCart)
-                        //console.log('guest cart stringify if ', newCart)
                         localStorage.setItem('guestCartItems', newCart)
                         } else {
-                            //console.log('in else')
                             guestCart = [product.id]
                             let newCart = JSON.stringify(guestCart)
-                            //console.log('guest cart stringify else ', newCart)
                             localStorage.setItem('guestCartItems', newCart)}
-                    // localStorage.setItem(`Product: ${numProductInCart}`, product.id)
-                    // setNumProductInCart(numProductInCart + 1)
                     }
                 }}>Add ProductId to Cart</button>
                 <hr></hr>
