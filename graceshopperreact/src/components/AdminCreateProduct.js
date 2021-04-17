@@ -44,8 +44,8 @@ const AdminCreateProduct = ({isAdmin}) =>{
     }else{
         return(
             <div>
-                <h1>Add Product</h1>
-                <form onSubmit={handleSubmit}>
+                <h1 >Add Product</h1>
+                <form className="addproduct" onSubmit={handleSubmit}>
                     <label>Album:</label>
                     <input
                         required

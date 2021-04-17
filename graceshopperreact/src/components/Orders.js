@@ -14,7 +14,7 @@ const Orders = ({currentUser}) => {
     }, [])
     console.log(orders)
     return (
-        <div>
+        <div className="myorders">
             <h2>Order History</h2>
             {orders?.map(order => {
                 return(
