@@ -9,3 +9,11 @@ export const getToken = () => {
 export const clearToken = () => {
     localStorage.removeItem('token')
 }
+
+export const loggedInUserId = (userId) => {
+    localStorage.setItem('id', userId)
+}
+
+export const getId = () => {
+    return JSON.parse(localStorage.getItem('id'))
+}

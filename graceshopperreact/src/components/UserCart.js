@@ -6,7 +6,6 @@ import {fetchUserCartItems, deleteCartItem, createOrder} from "../api"
 
 const UserCart = ({loggedIn, currentUser}) =>{
     const [userCart, setUserCart] = useState([])
-
     useEffect(async () => {
         const response = await fetchUserCartItems(currentUser.id)
         setUserCart(response)

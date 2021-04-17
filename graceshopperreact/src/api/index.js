@@ -1,4 +1,5 @@
 import { getToken } from "../auth";
+const token = localStorage.getItem('token')
 
 export const logIn = async ({ username, password }) => {
   console.log(username, password);
@@ -96,7 +97,7 @@ export const getUserInfo = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    const data = response.json();
+    const data = await response.json();
     //console.log(data)
     return data;
   } catch (error) {

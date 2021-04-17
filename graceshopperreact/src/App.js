@@ -44,7 +44,7 @@ const App = () => {
     if (loggedIn) {
         try {
             const data = await getUserInfo(loggedIn);
-            //console.log(data)
+            console.log(data)
             setCurrentUser(data);
             if(data.isAdmin){
               setIsAdmin(true)
@@ -140,7 +140,8 @@ const App = () => {
 
           <Route path='/profile'>
             <Profile 
-            loggedIn={loggedIn}/>
+            loggedIn={loggedIn}
+            currentUser={currentUser}/>
           </Route>
           
           <Route path='/admin'>
