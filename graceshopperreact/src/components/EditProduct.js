@@ -17,10 +17,10 @@ const EditProduct = ({productEdit, setProductEdit}) => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmitUpdate}>
-        <h2>Update Product:</h2>
+      <form className="updateProduct" onSubmit={handleSubmitUpdate}>
+        <h2>Edit Product:</h2>
         <label>Title: </label>
-        <input type="text" placeholder={product.title} onChange={(event) => setProduct({...product, title: event.target.value})} />
+        <input type="text"  onChange={(event) => setProduct({...product, title: event.target.value})} placeholder={product.title}/>
         <label>Artist: </label>
         <input type="text" onChange={(event) => setProduct({...product, trtist: event.target.value})} placeholder={product.artist}/>
         <label>Genre: </label>

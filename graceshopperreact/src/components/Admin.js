@@ -35,6 +35,7 @@ const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
     return <Redirect to="/" />;
   } else {
     return (
+        
       <div>
         <h1 className="Admin">Welcome to the Administrator Page</h1>
         <div className="link">
@@ -43,22 +44,27 @@ const Admin = ({ isAdmin, productEdit, setProductEdit }) => {
         </div>
         <h2 className="listheader">List of all products:</h2>
         {products?.map(product => {
-          return (  
-            <div className="products">
-              <h1>Title: {product.title}</h1>
-              <p>Artist: {product.artist}</p>
-              <p>Genre: {product.genre}</p>
-              <p>Release Date: {product.releaseDate}</p>
-              <p>Description: {product.description}</p>
-              <p>Price: {product.price}</p>
-              <p>Quantity: {product.quantity}</p>
-              <div>{product.imageLink}</div>
-              <img src={product.imageLink} />
-              <button type="button" onClick={() => 
-               {setProductEdit(product.id); history.push("/editproduct") }}>Edit</button>
-              <button type="button" onClick={() => handleSubmitDelete(product.id)}>Delete</button>
-            </div>
-          );
+            return (
+                <div className="homeProductList" >
+                    <div><img alt="imageLink" src={product.imageLink}/></div>
+                    <div className="homeInfo">
+                        <div className="info">
+                            <h3>Title: {product.title}</h3>
+                            <p>{product.artist}</p>
+                            <p>{product.genre}</p>
+                            <p>{product.description}</p>
+                            <p>{product.releaseDate.slice(0,10)}</p>
+                            <p>{product.price}</p>
+                            <p>{product.quantity ? 'In Stock' : "Out of stock"}</p>
+                            <button type="button" onClick={() => 
+                            {setProductEdit(product.id); history.push("/editproduct") }}>Edit</button>
+                            <button type="button" onClick={() => handleSubmitDelete(product.id)}>Delete</button>
+                        </div>
+                        <div className="feature">
+                        </div>
+                    
+                </div>
+            </div>)
         })}
       </div>
     );

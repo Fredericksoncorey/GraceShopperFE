@@ -127,7 +127,9 @@ const App = () => {
             <Profile 
             id={id}
             loggedIn={loggedIn}
-            currentUser={currentUser}/>
+            currentUser={currentUser}
+            userEdit = {userEdit} 
+            setUserEdit = {setUserEdit}/>
           </Route>
           
           <Route path='/admin'>

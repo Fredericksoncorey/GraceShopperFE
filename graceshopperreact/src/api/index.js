@@ -263,7 +263,7 @@ export const updateProduct = async (product) => {
 export const editProfile = async (user) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/products/update/${user.id}`,
+        `http://localhost:3000/api/products/update/${user}`,
         {
           method: "PATCH",
           body: JSON.stringify(user),
@@ -274,7 +274,7 @@ export const editProfile = async (user) => {
           },
         }
       );
-      const data = response.json();
+      const data = await response.json();
       return data;
     } catch (error) {
       console.error(error);
