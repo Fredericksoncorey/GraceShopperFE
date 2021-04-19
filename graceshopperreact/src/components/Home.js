@@ -21,7 +21,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
     
     const averageRating = ({reviews}) => {
         let averageRating = 0
-        console.log(reviews)
+        //console.log(reviews)
         for (let i=0;i<reviews.length;i++){
             averageRating = averageRating + reviews[i].rating
         }
@@ -73,7 +73,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
     useEffect(async () => {
         const response = await fetchProducts()
         setAllProducts(response)
-        console.log(allProducts)
+        //console.log(allProducts)
      }, []);
            
      
