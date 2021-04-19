@@ -479,3 +479,13 @@ h2{
     text-decoration-line: none;
     font-size: 30px;
 }
+
+.footer {
+    margin-top: 1px;
+    padding: 1px;
+    background-color: maroon;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
