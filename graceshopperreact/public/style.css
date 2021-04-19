@@ -4,7 +4,7 @@
 }
 
  html{
-    min-width: 850px;
+    min-width: 958px;
     font-family: 'Oswald', sans-serif;
 } 
 
@@ -131,6 +131,21 @@ h2{
     
 }
 
+.home a{
+    border:2px ridge maroon; 
+    border-radius: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    background: white;
+    padding: 7px;
+
+}
+
+.home h3 , .home p {
+    text-shadow: 1px 1px white
+}
+
 
 
 
@@ -176,6 +191,11 @@ h2{
 
 .feature b, .feature p, .feature u{
     text-align: center;
+    text-shadow: 1px 1px white
+}
+
+.feature li{
+    text-shadow: 1px 1px white
 }
 
 .reviews{
@@ -183,6 +203,39 @@ h2{
     text-align: center;
     margin: 10px ;
     padding: 10px
+}
+
+.register{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 205mm;
+    padding: 10px;
+    height: 88vh;
+    overflow-y: auto;
+    background-image: url('https://wallpapercave.com/wp/wp3255660.jpg');
+    align-content: center;
+    
+}
+
+.register form{
+    background: rgba(202, 202, 202, 0.74);
+    padding: 30px;
+}
+
+.register button{
+    justify-self: center;
+    width: 100%;
+}
+
+.register h1, .Admin{
+    text-align: center;
+    padding-bottom: 10px;
+    text-shadow: 1px 1px maroon
+}
+
+.register input{
+    margin: 4px;
 }
 
 
@@ -449,18 +502,13 @@ h2{
     margin: 0 5px
 }
 
-.Admin{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-}
+
 .link{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 .listheader{
     display: flex;

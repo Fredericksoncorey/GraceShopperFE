@@ -236,8 +236,8 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                             <div className="info">
                                  <h3>{product.title}</h3>
                                 <p>{averageRating(product)}</p>
-                                <p>{product.artist}</p>
-                                <p>{product.genre}</p>
+                                <p>Artist: {product.artist}</p>
+                                <p>Genre: {product.genre}</p>
                                 
                                 {showDescription!==key ? <button onClick ={()=>{
                                         setShowReview(null)
@@ -277,6 +277,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                             <div className="feature">
                             
                             {showDescription===key ?
+                                
                                 ReactHtmlParser(product.description) :null}
                             
                             {showReview===key ? 

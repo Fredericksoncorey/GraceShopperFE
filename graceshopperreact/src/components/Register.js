@@ -28,29 +28,31 @@ const Register = ({ setAuthorized, loggedIn, setLoggedIn }) => {
     return <Redirect to="/" />
   }else{
     return (
-      <form onSubmit={handleSubmit}>
-        <h1> Registration:</h1>
-        <label>Username:</label>
-        <input
-          name="Username"
-          required
-          onChange={(e) => setUser({ ...user, username: e.target.value })}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          required
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-        />
-        <label for ="email" >Email:</label>
-        <input
-          name="email"
-          type = "email"
-          required
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        />
-        <button type="submit">submit</button>
-      </form>
+      <div className="register">
+        <form onSubmit={handleSubmit}>
+          <h1> Registration</h1>
+          <label>Username:</label>
+          <input
+            name="Username"
+            required
+            onChange={(e) => setUser({ ...user, username: e.target.value })}
+          />
+          <label>Password:</label>
+          <input
+            type="password"
+            required
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+          />
+          <label for ="email" >Email:</label>
+          <input
+            name="email"
+            type = "email"
+            required
+            onChange={(e) => setUser({ ...user, email: e.target.value })}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     );
   }    
 };

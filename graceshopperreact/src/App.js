@@ -28,6 +28,7 @@ const App = () => {
   const [productEdit, setProductEdit] = useState('');
   const [userEdit, setUserEdit] = useState('');
   const [genreList, setGenreList]= useState();
+  const [timerDone, setTimerDone] = useState(false)
 
   
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,6 +57,10 @@ const App = () => {
     }
   }, [loggedIn])
 
+  useEffect(()=>{}, [timerDone])
+
+
+
 
   return (
     <Router>
@@ -69,7 +74,7 @@ const App = () => {
           {!loggedIn ? <Link className="Link" to= '/login'>Login</Link> : null}
           {!loggedIn ?<Link className="Link" to= '/register'>Sign Up</Link> : null}
           {isAdmin ? <Link className="Link" to= '/admin'>Admin Link</Link>: null}
-          <Link className="Link" to= '/profile'>My Profile</Link>
+          {loggedIn ? <Link className="Link" to= '/profile'>My Profile</Link>:null}
 
           {loggedIn ? <Link className="Link" onClick={() => {
                         clearToken();
@@ -146,11 +151,18 @@ const App = () => {
             setUserEdit = {setUserEdit}/>
           </Route>
           
-          <Route path='/admin'>
+          <Route path='/admin'> {/* setProductEdit, loggedIn, currentUser, genreList */}
             <Admin 
+            loggedIn={loggedIn}
+            currentUser={currentUser}
+            genreList={genreList}
+            setIsAdmin={setIsAdmin}
             isAdmin={isAdmin}
             productEdit = {productEdit} 
-            setProductEdit = {setProductEdit}/>
+            setProductEdit = {setProductEdit}
+            timerDone={timerDone}
+            setTimerDone={setTimerDone}/>
+            
           </Route>
 
           <Route path='/users'>
