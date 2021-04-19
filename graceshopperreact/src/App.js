@@ -60,7 +60,7 @@ const App = () => {
   return (
     <Router>
       <nav className="navBar">
-        <h1>For The Record</h1>
+        <h1 className="title">&#127932;For The Record </h1>
         <div>
           <Link className="Link" to= '/'>Home</Link>
           <Link className="Link" to= '/products'>Shop</Link>
@@ -174,6 +174,7 @@ const App = () => {
         </Switch>  
       <aside className="empty-right" ></aside>
       </main>
+      <footer></footer>
     
     </Router>
     

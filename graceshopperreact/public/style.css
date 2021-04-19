@@ -1,12 +1,25 @@
 
 *{
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 
  html{
     min-width: 850px;
-    
+    font-family: 'Oswald', sans-serif;
 } 
+
+main{
+    display: flex;
+    flex-flow: row;
+    justify-content:baseline;
+    justify-items: stretch;
+    align-items: stretch;
+}
+.title{
+    padding: 15px;
+    font-family: 'Bungee Shade', cursive;
+    text-shadow: 1px 1px maroon;
+}
 
 .navBar {
     display: flex;
@@ -38,6 +51,10 @@
 
 }
 
+h3{
+    text-decoration: underline;
+}
+
 img{
     align-self: start;
     width: 189px;
@@ -53,6 +70,7 @@ img{
     border: 2px ridge maroon;
     border-top: none;
     
+    
 }
 
 .empty-right{
@@ -61,44 +79,55 @@ img{
     background-image:linear-gradient(black,white);
     border: 2px ridge maroon;
     border-top: none;
+   
     
     
 }
-main{
-    display: flex;
-    flex-flow: row;
-    justify-content:baseline;
-    justify-items: stretch;
-    align-items: stretch;
-    
-}
-
-.home *{
-    background: none;
-}
 
 
-.makePost *{
-    background: none;
+footer{
+    background: chartreuse;
+    min-width: 850px;
+    height: initial;
 }
 
-.profile *{
-    background:none
+label{
+    font-size: 15px;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
-.makeMessage *{
-    background: none;
+select{
+    border:2px ridge maroon;
+    border-radius: 25px;
+    color: maroon;
 }
+
+input{
+    border:2px ridge maroon;
+    border-radius: 25px;
+    color: maroon;
+}
+
+button{
+    border:2px ridge maroon; 
+    border-radius: 25px;
+    font-weight: bold;
+
+
+}
+
 
 h2{
     text-align: center;
     text-decoration: underline;
 }
 .home{
-    width: 200mm;
+    width: 205mm;
     padding: 10px;
-    height: 83vh; 
+    height: 88vh;
     overflow-y: auto;
+    background-image: url('https://wallpapercave.com/wp/wp3255660.jpg');
     
 }
 
@@ -112,6 +141,7 @@ h2{
     border-top: 2px solid maroon;
     height: 189px;
     padding: 10px;
+    background: rgba(202, 202, 202, 0.74);
 }
 
 
@@ -126,7 +156,10 @@ h2{
 }
 
 .info{
-    width:50vh
+    width:50vh;
+    font-family: 'Roboto', sans-serif;
+    
+
 }
 
 .feature{
@@ -134,19 +167,29 @@ h2{
     flex-flow: column;
     border-left:1px solid rgba(0, 0, 0, 0.288);
     width:500px;
-    overflow-y:scroll;  
-}
-
-.feature p, u {
-    padding: 10px;
+    overflow-y:scroll; 
+    padding-right: 8px;
     
+    
+     
+}
+
+.feature b, .feature p, .feature u{
+    text-align: center;
+}
+
+.reviews{
+    border: 2px ridge black;
+    text-align: center;
+    margin: 10px ;
+    padding: 10px
 }
 
 
 
-.homeInfo p, b, h3{
+/* .homeInfo p, b, h3{
    margin: auto;
-}
+} */
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
