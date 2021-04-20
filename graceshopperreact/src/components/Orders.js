@@ -26,7 +26,7 @@ const Orders = ({currentUser}) => {
 
     console.log(orders)
     return (
-        <div>Past Orders:{
+        <div className="orders">Past Orders:{
         orders?.map(item => {
             let index = allProducts.findIndex((idx) => idx.id == item.id)
             console.log(index)
@@ -38,6 +38,8 @@ const Orders = ({currentUser}) => {
                 <div>
                 <img src={allProducts[index].imageLink} height="50" with ="50"/>
                 <p>Title: {allProducts[index].title}</p> 
+                <p>Price: {allProducts[index].price}</p> 
+                <p>Quantity: {item.quantity}</p> 
                 </div>
                 : <p></p>}
                 </div>

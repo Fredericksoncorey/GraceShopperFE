@@ -581,7 +581,7 @@ h2{
     width: 100%;
   }
 
-.userCart, .guestCart{
+.userCart, .guestCart, .orders{
     width: 205mm;
     padding: 10px;
     height: 88vh;
