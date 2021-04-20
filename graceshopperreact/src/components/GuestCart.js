@@ -31,10 +31,10 @@ const GuestCart = () => {
         //setGuestCart(cart)
         //console.log(guestCart)
     if (!guestCart[0]){
-        return (<h2>Your Guest Cart is Empty.</h2>)
+        return (<h2 className="empty">Your Guest Cart is Empty.</h2>)
     } else {
         return (
-            <div>{
+            <div className="guestCart">{
             guestCart?.map((item, pos) => {
                 let index = allProducts.findIndex((idx) => idx.id == item)
                 return (

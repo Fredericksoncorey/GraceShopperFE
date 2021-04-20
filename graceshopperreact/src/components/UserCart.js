@@ -39,11 +39,11 @@ const UserCart = ({loggedIn, currentUser}) =>{
 
     let newTotal = 0
     if (!userCart[0]) {
-        return <h2>Your cart is empty.</h2>
+        return <h2 className="empty">Your cart is empty.</h2>
     } else { //console.log(userCart)
 
         return (
-        <div>{
+        <div className="userCart">{
         userCart?.map(item => {
             let index = allProducts.findIndex((idx) => idx.id == item.product)
             return (
@@ -57,7 +57,6 @@ const UserCart = ({loggedIn, currentUser}) =>{
             <p>Total: ${(parseFloat(allProducts[index].price.slice(1)) * item.quantity)}</p>
             </div>
             : <p></p>}
-            
             <button onClick={async()=> {
                 const response = await deleteCartItem(item.id)
                 setUserCart(userCart.filter(cartItem => cartItem.id != response.id));
