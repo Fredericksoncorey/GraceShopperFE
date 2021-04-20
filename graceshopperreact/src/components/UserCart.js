@@ -9,6 +9,7 @@ const UserCart = ({loggedIn, currentUser}) =>{
     const [quantUpdate, setQuantUpdate] = useState()
     const [currentItem, setCurrentItem] = useState()
     const [cartTotal, setCartTotal] = useState(0)
+    let total = 0
 
     useEffect(async () => {
         const response = await fetchProducts()
@@ -53,6 +54,11 @@ const UserCart = ({loggedIn, currentUser}) =>{
         <div className="home">{
         userCart?.map(item => {
             let index = allProducts.findIndex((idx) => idx.id == item.product)
+            
+            if (allProducts[index]) { 
+                total = total + (parseFloat(allProducts[index].price.slice(1)) * item.quantity);
+                console.log(total) 
+            } 
             return (
             <div>
             {allProducts[index] ? 
@@ -67,7 +73,7 @@ const UserCart = ({loggedIn, currentUser}) =>{
             </div>
             : <p></p>}
             <div className="removeItem">
-                <button  onClick={async()=> {
+                <button onClick={async()=> {
                     const response = await deleteCartItem(item.id)
                     setUserCart(userCart.filter(cartItem => cartItem.id != response.id));
                     //alert("Item has been removed")
@@ -77,17 +83,23 @@ const UserCart = ({loggedIn, currentUser}) =>{
                     <label htmlFor = "quantity">Quantity:</label>
                     <input type ="number" min="1" placeholder={item.quantity}
                         onChange={(e) => { 
+                        // console.log(total, cartTotal)
+                        total = cartTotal - (parseFloat(allProducts[index].price.slice(1)) * item.quantity)
                         item.quantity = parseInt(e.target.value) 
+                        total = total + (parseFloat(allProducts[index].price.slice(1)) * item.quantity)
+                        setCartTotal(total)
                         }}
                         />
                     <button type="submit" onClick={()=> setCurrentItem(item)}>Change Quantity</button>
                 </form>
-            </div>
-            <hr></hr>
+                <hr></hr>
+                </div>
             </div>
             )
-        })}
-        <button className="checkout"onClick={async()=>{
+        })} 
+        
+        <p>Cart Total ${cartTotal === 0 ? total : cartTotal}</p>
+        <button onClick={async()=>{
             //console.log('button clicked')
             alert('Your order has been placed, Thank you!')
             console.log(userCart)
