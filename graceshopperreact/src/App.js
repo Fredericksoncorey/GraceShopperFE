@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
 import {getToken, clearToken} from "./auth"
-import {getUserInfo, getGenreList, getUser} from "./api"
+import {getUserInfo, getGenreList} from "./api"
 import {
   Admin,
   Login,
@@ -16,6 +16,7 @@ import {
   Orders,
   Users,
   EditProfile,
+  IntroPage,
 } from "./components"
 
 
@@ -68,7 +69,7 @@ const App = () => {
         <h1 className="title">&#127932;For The Record </h1>
         <div>
           <Link className="Link" to= '/'>Home</Link>
-          <Link className="Link" to= '/products'>Shop</Link>
+          <Link className="Link" to= '/home'>Shop</Link>
           <Link className="Link" to= '/cart'>Cart</Link>
           {loggedIn ? <Link className="Link" to= '/orders'>Orders</Link> : null}
           {!loggedIn ? <Link className="Link" to= '/login'>Login</Link> : null}
@@ -92,7 +93,11 @@ const App = () => {
         <aside className="empty-left"></aside>
         <Switch>
           
-          <Route exact path= '/'>
+        <Route exact path= '/'>
+             <IntroPage />
+          </Route>  
+
+          <Route exact path= '/home'>
              <Home 
              loggedIn={loggedIn} 
              currentUser={currentUser}
