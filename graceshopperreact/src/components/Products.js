@@ -46,7 +46,7 @@ const Products = ({loggedIn, currentUser}) => {
                             let newCart = JSON.stringify(guestCart)
                             localStorage.setItem('guestCartItems', newCart)}
                     }
-                }}>Add ProductId to Cart</button>
+                }}>Add Record to Cart</button>
                 <hr></hr>
                 </div>
             )})

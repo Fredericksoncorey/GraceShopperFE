@@ -1,12 +1,25 @@
 
 *{
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 
  html{
-    min-width: 850px;
-    
+    min-width: 958px;
+    font-family: 'Oswald', sans-serif;
 } 
+
+main{
+    display: flex;
+    flex-flow: row;
+    justify-content:baseline;
+    justify-items: stretch;
+    align-items: stretch;
+}
+.title{
+    padding: 15px;
+    font-family: 'Bungee Shade', cursive;
+    text-shadow: 1px 1px maroon;
+}
 
 .navBar {
     display: flex;
@@ -38,6 +51,10 @@
 
 }
 
+h3{
+    text-decoration: underline;
+}
+
 img{
     align-self: start;
     width: 189px;
@@ -53,6 +70,7 @@ img{
     border: 2px ridge maroon;
     border-top: none;
     
+    
 }
 
 .empty-right{
@@ -61,45 +79,71 @@ img{
     background-image:linear-gradient(black,white);
     border: 2px ridge maroon;
     border-top: none;
+   
     
     
 }
-main{
-    display: flex;
-    flex-flow: row;
-    justify-content:baseline;
-    justify-items: stretch;
-    align-items: stretch;
-    
-}
-
-.home *{
-    background: none;
-}
 
 
-.makePost *{
-    background: none;
+footer{
+    background: chartreuse;
+    min-width: 850px;
+    height: initial;
 }
 
-.profile *{
-    background:none
+label{
+    font-size: 15px;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
-.makeMessage *{
-    background: none;
+select{
+    border:2px ridge maroon;
+    border-radius: 25px;
+    color: maroon;
 }
+
+input{
+    border:2px ridge maroon;
+    border-radius: 25px;
+    color: maroon;
+}
+
+button{
+    border:2px ridge maroon; 
+    border-radius: 25px;
+    font-weight: bold;
+
+
+}
+
 
 h2{
     text-align: center;
     text-decoration: underline;
 }
 .home{
-    width: 200mm;
+    width: 205mm;
     padding: 10px;
-    height: 83vh; 
+    height: 88vh;
     overflow-y: auto;
+    background-image: url('https://wallpapercave.com/wp/wp3255660.jpg');
     
+}
+
+.home a{
+    border:2px ridge maroon; 
+    border-radius: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    background: white;
+    padding: 7px;
+
+}
+
+.home h3 , .home p {
+    text-shadow: 1px 1px white
 }
 
 
@@ -112,6 +156,7 @@ h2{
     border-top: 2px solid maroon;
     height: 189px;
     padding: 10px;
+    background: rgba(202, 202, 202, 0.74);
 }
 
 
@@ -126,7 +171,10 @@ h2{
 }
 
 .info{
-    width:50vh
+    width:50vh;
+    font-family: 'Roboto', sans-serif;
+    
+
 }
 
 .feature{
@@ -134,19 +182,67 @@ h2{
     flex-flow: column;
     border-left:1px solid rgba(0, 0, 0, 0.288);
     width:500px;
-    overflow-y:scroll;  
+    overflow-y:scroll; 
+    padding-right: 8px;
+    
+    
+     
 }
 
-.feature p, u {
+.feature b, .feature p, .feature u{
+    text-align: center;
+    text-shadow: 1px 1px white
+}
+
+.feature li{
+    text-shadow: 1px 1px white
+}
+
+.reviews{
+    border: 2px ridge black;
+    text-align: center;
+    margin: 10px ;
+    padding: 10px
+}
+
+.register{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 205mm;
     padding: 10px;
+    height: 88vh;
+    overflow-y: auto;
+    background-image: url('https://wallpapercave.com/wp/wp3255660.jpg');
+    align-content: center;
     
 }
 
-
-
-.homeInfo p, b, h3{
-   margin: auto;
+.register form{
+    background: rgba(202, 202, 202, 0.74);
+    padding: 30px;
 }
+
+.register button{
+    justify-self: center;
+    width: 100%;
+}
+
+.register h1, .Admin{
+    text-align: center;
+    padding-bottom: 10px;
+    text-shadow: 1px 1px maroon
+}
+
+.register input{
+    margin: 4px;
+}
+
+
+
+/* .homeInfo p, b, h3{
+   margin: auto;
+} */
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
@@ -406,18 +502,13 @@ h2{
     margin: 0 5px
 }
 
-.Admin{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-}
+
 .link{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 .listheader{
     display: flex;
@@ -475,7 +566,7 @@ h2{
     height: 50%;
     font-size: 15px;
 }
-.user{
+.user {
     text-decoration-line: none;
     font-size: 30px;
 }
@@ -492,3 +583,11 @@ h2{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
   }
+
+.userCart, .guestCart{
+    width: 205mm;
+    padding: 10px;
+    height: 88vh;
+    overflow-y: auto;
+    background-image: url('https://wallpapercave.com/wp/wp3255660.jpg');
+}

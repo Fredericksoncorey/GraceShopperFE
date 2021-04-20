@@ -165,25 +165,49 @@ export const fetchUserCartItems = async (userId) => {
 };
 
 export const searchProductsByArtist = async (artist) => {
-  try {
-    const response = await fetch(
-      `http://localhost:3000/api/products/artist/${artist}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await response.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
+  const pos = artist.indexOf("/")
+  if(pos){
+    
+    let newArtist= artist.split('/') 
+    console.log(newArtist[0])
+    
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/products/artist/${newArtist[0]}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }else{
+  
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/products/artist/${artist}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  };
+}
 
 export const searchProductsByGenre = async (genre) => {
-
+    
     try {
         const response = await fetch(`http://localhost:3000/api/products/genre/${genre}`, {
             headers: {
@@ -202,8 +226,29 @@ export const searchProductsByGenre = async (genre) => {
 }
 
 export const searchProductsByTitle = async (title) => {
-
+  const pos = title.indexOf("/")
+  if(pos){
+    
+    let newTitle= title.split('/') 
+    console.log(newTitle[0])
+    
     try {
+        const response = await fetch(`http://localhost:3000/api/products/title/${newTitle}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+        const data = await response.json()
+        console.log(data)
+        return data
+        
+            
+    } catch(error){
+        throw error
+    }
+  }else{
+      
+      try {
         const response = await fetch(`http://localhost:3000/api/products/title/${title}`, {
             headers: {
               'Content-Type': 'application/json',
@@ -216,6 +261,7 @@ export const searchProductsByTitle = async (title) => {
             
     } catch(error){
         throw error
+    }
     }
 
 }

@@ -21,13 +21,13 @@ const Home = ({loggedIn, currentUser, genreList}) => {
     
     const averageRating = ({reviews}) => {
         let averageRating = 0
-        console.log(reviews)
+        //console.log(reviews)
         for (let i=0;i<reviews.length;i++){
             averageRating = averageRating + reviews[i].rating
         }
         averageRating = averageRating/reviews.length
         if(isNaN(averageRating)){
-            return `This product has not been rated yet`
+            return `Has not yet been rated `
         }
         return `Rating: ${averageRating}/5`
     } 
@@ -73,7 +73,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
     useEffect(async () => {
         const response = await fetchProducts()
         setAllProducts(response)
-        console.log(allProducts)
+        //console.log(allProducts)
      }, []);
            
      
@@ -163,10 +163,10 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                         <div><img alt="imageLink" src={product.imageLink}/></div>}
                         <div className="homeInfo">
                             <div className="info">
-                                 <h3>Title: {product.title}</h3>
+                                 <h3>{product.title}</h3>
                                 <p>{averageRating(product)}</p>
-                                <p>{product.artist}</p>
-                                <p>{product.genre}</p>
+                                <p>Artist: {product.artist}</p>
+                                <p>Genre: {product.genre}</p>
                                 
                                 {showDescription!==key ? <button onClick ={()=>{
                                         setShowReview(null)
@@ -206,14 +206,15 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                             <div className="feature">
                             
                             {showDescription===key ?
+                                
                                 ReactHtmlParser(product.description) :null}
                             
                             {showReview===key ? 
                                 product.reviews.map(review => { 
-                                    return(<>
+                                    return(<div className="reviews">
                                         <u>{`${review.rating}/5 by ${review.byUser}`}</u>
                                         <p>{review.review}</p>
-                                    </>)
+                                    </div>)
                                 }
                                 )
                             :null}
@@ -233,10 +234,10 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                         <div><img alt="imageLink" src={product.imageLink}/></div>}
                         <div className="homeInfo">
                             <div className="info">
-                                 <h3>Title: {product.title}</h3>
+                                 <h3>{product.title}</h3>
                                 <p>{averageRating(product)}</p>
-                                <p>{product.artist}</p>
-                                <p>{product.genre}</p>
+                                <p>Artist: {product.artist}</p>
+                                <p>Genre: {product.genre}</p>
                                 
                                 {showDescription!==key ? <button onClick ={()=>{
                                         setShowReview(null)
@@ -276,14 +277,15 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                             <div className="feature">
                             
                             {showDescription===key ?
+                                
                                 ReactHtmlParser(product.description) :null}
                             
                             {showReview===key ? 
                                 product.reviews.map(review => { 
-                                    return(<>
+                                    return(<div className="reviews">
                                         <u>{`${review.rating}/5 by ${review.byUser}`}</u>
                                         <p>{review.review}</p>
-                                    </>)
+                                    </div>)
                                 }
                                 )
                             :null}
