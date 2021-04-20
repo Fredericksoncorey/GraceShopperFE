@@ -31,21 +31,29 @@ const GuestCart = () => {
         //setGuestCart(cart)
         //console.log(guestCart)
     if (!guestCart[0]){
-        return (<h2 className="empty">Your Guest Cart is Empty.</h2>)
+        return(
+            <div className="register">
+                <h2 className="cartH2" >Your cart is empty.</h2>
+            </div>)
     } else {
         return (
-            <div className="guestCart">{
+            <div className="home ">{
             guestCart?.map((item, pos) => {
                 let index = allProducts.findIndex((idx) => idx.id == item)
                 return (
                 <div>
                 {allProducts[index] ? 
-                <div>
+                <div className="cartProducts">
                 <img src={allProducts[index].imageLink} height="50" with ="50"/>
-                <p>Title: {allProducts[index].title}</p> 
-                <p>Price: {allProducts[index].price}</p>
+                <div className='cartProductInfo'>
+                        <p>Title: {allProducts[index].title}</p> 
+                        <p>Quantity: {item.quantity}</p>
+                        <p>Price: {allProducts[index].price}</p>
+                        <p>Total: ${(parseFloat(allProducts[index].price.slice(1)) * item.quantity)}</p>
+                    </div>
                 </div>
                 : <p></p>} 
+                    <div className="removeItemGuest">
                     <button onClick={()=> { 
                         //console.log(idx)
                         cart.splice(pos, 1)
@@ -55,11 +63,12 @@ const GuestCart = () => {
                         localStorage.setItem('guestCartItems', newCart)
                         setGuestCart(cart)
                     }}>Remove Item From Cart</button>
+                    </div>
                     <hr></hr>
                     </div>
                 )
             })}
-            <form>
+            <form className="checkoutGuest">
             <label for ="email" >Email:</label>
                 <input
                 name="email"

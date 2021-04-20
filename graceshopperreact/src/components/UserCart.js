@@ -31,52 +31,63 @@ const UserCart = ({loggedIn, currentUser}) =>{
             } document.getElementById("itemQuantity").reset()
         } 
     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
+        if(!currentUser){
+            return
+        }
         const response = await fetchUserCartItems(currentUser.id)
         setUserCart(response)
         //console.log(response)
-    }, [quantityResp]);
+    }, [quantityResp, currentUser]);
 
     let newTotal = 0
     if (!userCart[0]) {
-        return <h2 className="empty">Your cart is empty.</h2>
+        return  (
+            <div className="register">
+                <h2 className="cartH2" >Your cart is empty.</h2>
+            </div>)
     } else { //console.log(userCart)
 
         return (
-        <div className="userCart">{
+        <div className="home">{
         userCart?.map(item => {
             let index = allProducts.findIndex((idx) => idx.id == item.product)
             return (
             <div>
             {allProducts[index] ? 
-            <div>
-            <img src={allProducts[index].imageLink} height="50" with ="50"/>
-            <p>Title: {allProducts[index].title}</p> 
-            <p>Quantity: {item.quantity}</p>
-            <p>Price: {allProducts[index].price}</p>
-            <p>Total: ${(parseFloat(allProducts[index].price.slice(1)) * item.quantity)}</p>
+                <div className="cartProducts">
+                     <img src={allProducts[index].imageLink} height="50" with ="50"/>
+                    <div className='cartProductInfo'>
+                        <p>Title: {allProducts[index].title}</p> 
+                        <p>Quantity: {item.quantity}</p>
+                        <p>Price: {allProducts[index].price}</p>
+                        <p>Total: ${(parseFloat(allProducts[index].price.slice(1)) * item.quantity)}</p>
+                    </div>
             </div>
             : <p></p>}
-            <button onClick={async()=> {
-                const response = await deleteCartItem(item.id)
-                setUserCart(userCart.filter(cartItem => cartItem.id != response.id));
-                //alert("Item has been removed")
-                //console.log(response)
-            }}>Remove Item From Cart</button>
-            <form id="itemQuantity" onSubmit={handleSubmit}>
-                <label htmlFor = "quantity">Quantity:</label>
-                <input type ="number" min="1" placeholder={item.quantity}
-                    onChange={(e) => { 
-                    item.quantity = parseInt(e.target.value) 
-                    }}
-                    />
-                <button type="submit" onClick={()=> setCurrentItem(item)}>Change Quantity</button>
-            </form>
+            <div className="removeItem">
+                <button  onClick={async()=> {
+                    const response = await deleteCartItem(item.id)
+                    setUserCart(userCart.filter(cartItem => cartItem.id != response.id));
+                    //alert("Item has been removed")
+                    //console.log(response)
+                }}>Remove Item From Cart</button>
+                <form id="itemQuantity" onSubmit={handleSubmit}>
+                    <label htmlFor = "quantity">Quantity:</label>
+                    <input type ="number" min="1" placeholder={item.quantity}
+                        onChange={(e) => { 
+                        item.quantity = parseInt(e.target.value) 
+                        }}
+                        />
+                    <button type="submit" onClick={()=> setCurrentItem(item)}>Change Quantity</button>
+                </form>
+            </div>
             <hr></hr>
             </div>
             )
         })}
-        <button onClick={async()=>{
+        <button className="checkout"onClick={async()=>{
             //console.log('button clicked')
             alert('Your order has been placed, Thank you!')
             console.log(userCart)

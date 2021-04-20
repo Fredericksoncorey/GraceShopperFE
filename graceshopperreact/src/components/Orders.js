@@ -26,19 +26,24 @@ const Orders = ({currentUser}) => {
 
     console.log(orders)
     return (
-        <div>Past Orders:{
-        orders?.map(item => {
+        <div className="home">
+            <h2>Past Orders:</h2>
+            
+        {orders?.map(item => {
             let index = allProducts.findIndex((idx) => idx.id == item.id)
             console.log(index)
             return (
-                
-                <div>
-                <hr></hr>
+                <div> 
                 {allProducts[index] ? 
-                <div>
-                <img src={allProducts[index].imageLink} height="50" with ="50"/>
-                <p>Title: {allProducts[index].title}</p> 
-                </div>
+               <div className="homeProductList">
+               <img src={allProducts[index].imageLink} height="50" with ="50"/>
+              <div className='cartProductInfo'>
+                  <p>Title: {allProducts[index].title}</p> 
+                  <p>Quantity: {item.quantity}</p>
+                  <p>Price: {allProducts[index].price}</p>
+                  <p>Total: ${(parseFloat(allProducts[index].price.slice(1)) * item.quantity)}</p>
+              </div>
+      </div>
                 : <p></p>}
                 </div>
             )
