@@ -481,11 +481,14 @@ h2{
 }
 
 .footer {
-    margin-top: 1px;
+    /* margin-top: auto; */
+    margin:auto;
     padding: 1px;
     background-color: maroon;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
   }
