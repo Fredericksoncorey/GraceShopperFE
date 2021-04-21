@@ -4,7 +4,7 @@
 }
 
  html{
-    min-width: 958px;
+    min-width: 995px;
     font-family: 'Oswald', sans-serif;
 } 
 
@@ -15,11 +15,17 @@ main{
     justify-items: stretch;
     align-items: stretch;
 }
-.title{
-    padding: 15px;
-    font-family: 'Bungee Shade', cursive;
-    text-shadow: 1px 1px maroon;
+
+.icon{
+    height: 30px;
+    width: 30px;
+    display:inline;
+    position: relative;
+    top: 7.4px;
+    right: 4px
+
 }
+
 
 .navBar {
     display: flex;
@@ -125,7 +131,7 @@ h2{
 .home{
     width: 205mm;
     padding: 10px;
-    height: 88vh;
+    height: 87vh;
     overflow-y: auto;
     background-image: url('https://wallpapercave.com/wp/wp3255660.jpg');
     background-size: cover;
@@ -155,7 +161,7 @@ h2{
 .homeProductList {
     display:flex;
     border-top: 2px solid maroon;
-    height: 189px;
+    height: 204px;
     padding: 10px;
     background: rgba(202, 202, 202, 0.74);
 }
@@ -243,7 +249,6 @@ h2{
     text-align: center;
     text-shadow: 2px 2px maroon;
     font-size: 50px;
-    font-family: 'Monoton', cursive;
 }
 
 .register form, .intropage{
@@ -615,6 +620,7 @@ h2{
     flex-direction: column;
     align-items: center;
     margin: 100px;
+    background: rgba(202, 202, 202, 0.74) ;
 }
 .account{
     display: flex;
@@ -625,6 +631,8 @@ h2{
     border-style: double;
     border-color: rgb(143, 4, 4);
     padding: 20px;
+    text-shadow: 1px 1px maroon
+    
 }
 .username, .email{
     font-family: Arial, Helvetica, sans-serif;
@@ -649,6 +657,7 @@ h2{
 .user {
     text-decoration-line: none;
     font-size: 30px;
+    padding: 10px
 }
 
 .footer {
@@ -660,7 +669,14 @@ h2{
     left: 0;
     width: 100%;
     font-family: 'Monoton', cursive;   
-    font-size: 10px;
+    display:flex;
+    justify-content: space-evenly;
+
+  }
+
+  .footer p, .footer h1{
+      font-size: 10px;
+      color: white
   }
 
 .userCart, .guestCart, .orders{
@@ -695,3 +711,23 @@ h2{
     border-style: solid;
 }
 
+.title{
+    padding: 15px;
+    font-family: 'Bungee Shade', cursive;
+    text-shadow: 1px 1px maroon;
+}
+
+.titleIntro{
+    font-family: 'Bungee Shade', cursive;
+}
+
+.iconIntro{
+    box-shadow: none;
+    height: 70px;
+    width: 70px;
+    display:inline;
+    position: relative;
+    top: 19px;
+    right: 13px
+
+}

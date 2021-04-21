@@ -7,7 +7,7 @@ const Profile = ({userEdit, setUserEdit,loggedIn, currentUser}) =>{
     if (!loggedIn) {
         return <Redirect to="/" />;
       } else {
-    return (<div>
+    return (<div className="home">
         <h1 className="account">Your Account information:</h1>
                   <div className="myprofile">
                       <h1 className="username">Username: </h1>

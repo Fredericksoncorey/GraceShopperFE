@@ -20,6 +20,7 @@ const GuestCart = () => {
     const [cartTotal, setCartTotal] = useState(0)
     const [currentItem, setCurrentItem] = useState()
     let total = 0
+    let totals = []
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,6 +35,17 @@ const GuestCart = () => {
         } finally {
 
         } document.getElementById("itemQuantity").reset()
+    } 
+
+    const getTotal = (totals) =>{
+        console.log(totals)
+        let finalTotal = 0
+        totals.forEach(total=>{
+            finalTotal = finalTotal + total
+        })
+        return finalTotal
+
+
     } 
 
     useEffect(async () => {
@@ -65,8 +77,7 @@ const GuestCart = () => {
                 let index = allProducts.findIndex((idx) => idx.id == item)
                 
                 if (allProducts[index]) { 
-                    total = total + (parseFloat(allProducts[index].price.slice(1)) * quantity[pos]);
-                    console.log(total) 
+                    totals.push((parseFloat(allProducts[index].price.slice(1)) * quantity[pos]))
                 }
 
                 return (
@@ -122,7 +133,7 @@ const GuestCart = () => {
                 required
                 onChange={(e) => setGuestEmail(e.target.value)}
                 />
-                <p>Cart Total ${cartTotal == 0 ? total : cartTotal}</p>
+                <p>Cart Total ${getTotal(totals)}</p>
             <button onClick={async() => {
                 alert('Your order has been placed, Thank you!')
                 guestCart.map(async (item) => {

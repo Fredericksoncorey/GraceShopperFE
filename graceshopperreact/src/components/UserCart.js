@@ -10,7 +10,20 @@ const UserCart = ({loggedIn, currentUser}) =>{
     const [currentItem, setCurrentItem] = useState()
     const [cartTotal, setCartTotal] = useState(0)
     let total = 0
+    let totals = []
 
+    const getTotal = (totals) =>{
+        
+        let finalTotal = 0
+        totals.forEach(total=>{
+            finalTotal = finalTotal + total
+        })
+        return finalTotal
+
+
+    } 
+   
+   
     useEffect(async () => {
         const response = await fetchProducts()
         setAllProducts(response)
@@ -51,13 +64,14 @@ const UserCart = ({loggedIn, currentUser}) =>{
     } else { //console.log(userCart)
 
         return (
-        <div className="home">{
-        userCart?.map(item => {
+        <div className="home">
+           {<button onClick={()=>{getTotal(totals)}}>get total</button> }
+        {userCart?.map(item => {
             let index = allProducts.findIndex((idx) => idx.id == item.product)
             
             if (allProducts[index]) { 
-                total = total + (parseFloat(allProducts[index].price.slice(1)) * item.quantity);
-                console.log(total) 
+                totals.push((parseFloat(allProducts[index].price.slice(1)) * item.quantity))
+                
             } 
             return (
             <div>
@@ -68,7 +82,7 @@ const UserCart = ({loggedIn, currentUser}) =>{
                         <p>Title: {allProducts[index].title}</p> 
                         <p>Quantity: {item.quantity}</p>
                         <p>Price: {allProducts[index].price}</p>
-                        <p>Total: ${(parseFloat(allProducts[index].price.slice(1)) * item.quantity)}</p>
+                        <p id="total" value ={(parseFloat(allProducts[index].price.slice(1)) * item.quantity)}>Total: ${(parseFloat(allProducts[index].price.slice(1)) * item.quantity)}</p>
                     </div>
             </div>
             : <p></p>}
@@ -98,8 +112,8 @@ const UserCart = ({loggedIn, currentUser}) =>{
             )
         })} 
         
-        <p>Cart Total ${cartTotal === 0 ? total : cartTotal}</p>
-        <button onClick={async()=>{
+        <p className="total">Cart Total ${getTotal(totals)}</p>
+        <button className="checkout" onClick={async()=>{
             //console.log('button clicked')
             alert('Your order has been placed, Thank you!')
             console.log(userCart)
