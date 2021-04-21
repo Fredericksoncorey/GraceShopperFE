@@ -30,10 +30,8 @@ import { deleteUser, getAllUsers} from "../api";
             {users?.map(user => {
                 return(
                 <div className="myusers">
-                    <h1 className="username">Username: </h1>
-                    <h2 className="user">{user.username}</h2>
-                    <h1 className= "email">Email: </h1>
-                    <h2 className="user">{user.email}</h2>
+                    <h1 className="username">Username: <em>{user.username}</em></h1>
+                    <h1 className= "username">Email: <em>{user.email}</em></h1>
                     <button type="button" onClick={() => handleSubmitDelete(user.id)}>Delete</button>
                 </div>
                 )
