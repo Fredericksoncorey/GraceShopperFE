@@ -34,7 +34,7 @@ const Admin = ({ isAdmin, setProductEdit, loggedIn, currentUser, genreList }) =>
     if(isNaN(averageRating)){
         return `Has not yet been rated `
     }
-    return `Rating: ${averageRating}/5`
+    return `Rating: ${averageRating.toFixed(1)}/5`
 } 
 
 const handleSubmit = async (event) => {
