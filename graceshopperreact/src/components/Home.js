@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from 'react';
-import { fetchProducts, getGenreList, searchProductsByArtist, searchProductsByGenre, searchProductsByTitle, createCartItem } from '../api'
+import { fetchProducts, searchProductsByArtist, searchProductsByGenre, searchProductsByTitle, createCartItem } from '../api'
 import ReactHtmlParser from 'react-html-parser';
 
 const Home = ({loggedIn, currentUser, genreList}) => {
@@ -58,6 +58,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
     useEffect(async () => {
             if(!searchResults){
                 return
+            // eslint-disable-next-line eqeqeq
             }else if(searchResults==false){
                 setSearchFailed(true)
 
@@ -185,7 +186,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                                     productToAdd.userId = currentUser.id
                                     productToAdd.productId = product.id
                                     productToAdd.quantity = 1
-                                    const response = await createCartItem(productToAdd)
+                                    await createCartItem(productToAdd)
                                 } else if (!loggedIn){
                                     if (localStorage.getItem('guestCartItems')) {
                                     guestCart = JSON.parse(localStorage.getItem('guestCartItems'))
@@ -265,7 +266,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                                     productToAdd.userId = currentUser.id
                                     productToAdd.productId = product.id
                                     productToAdd.quantity = 1
-                                    const response = await createCartItem(productToAdd)
+                                    await createCartItem(productToAdd)
                                 } else if (!loggedIn){
                                     if (localStorage.getItem('guestCartItems')) {
                                     guestCart = JSON.parse(localStorage.getItem('guestCartItems'))

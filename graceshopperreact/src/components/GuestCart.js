@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {React, useEffect, useState} from 'react';
 import {createGuestOrder, fetchProducts} from "../api"
 
@@ -5,9 +6,6 @@ let cart = []
 let newCart = ''
 let quantity = []
 let newQuantity = ''
- let numCartItems = 1
- let moreCartItems = true
- let productIds = []
 
 const GuestCart = () => {
     const [allProducts, setAllProducts] = useState([])
@@ -16,7 +14,6 @@ const GuestCart = () => {
     const [guestEmail, setGuestEmail] = useState('')
     const [cartTotal, setCartTotal] = useState(0)
     const [currentItem, setCurrentItem] = useState()
-    let total = 0
     let totals = []
 
     const handleSubmit = async (e) => {
@@ -39,6 +36,7 @@ const GuestCart = () => {
 
     } 
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
     localStorage.getItem('guestCartItems')
     cart = await JSON.parse(localStorage.getItem('guestCartItems'))
@@ -47,6 +45,7 @@ const GuestCart = () => {
     setGuestQuantity(quantity)
     }, [])
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         const response = await fetchProducts()
         setAllProducts(response)
@@ -61,6 +60,7 @@ const GuestCart = () => {
         return (
             <div className="home ">{
             guestCart?.map((item, pos) => {
+                // eslint-disable-next-line eqeqeq
                 let index = allProducts.findIndex((idx) => idx.id == item)
                 
                 if (allProducts[index]) { 
@@ -71,7 +71,7 @@ const GuestCart = () => {
                 <div>
                     {allProducts[index] ? 
                     <div className="cartProducts">
-                    <img src={allProducts[index].imageLink} height="50" with ="50"/>
+                    <img alt="" src={allProducts[index].imageLink} height="50" with ="50"/>
                     <div className='cartProductInfo'>
                     <p>Title: {allProducts[index].title}</p> 
                     <p>Price: {allProducts[index].price}</p>
@@ -124,7 +124,7 @@ const GuestCart = () => {
             <button onClick={async() => {
                 alert('Your order has been placed, Thank you!')
                 guestCart.map(async (item) => {
-                    const responseOrder = await createGuestOrder(null, guestEmail, item, 1)
+                    await createGuestOrder(null, guestEmail, item, 1)
                     localStorage.setItem('guestCartItems', "[]")
                 })
             }}>Click To Checkout</button>

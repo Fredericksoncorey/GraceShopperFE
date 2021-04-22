@@ -34,13 +34,14 @@ const Orders = ({currentUser}) => {
             <h2>Past Purchases:</h2>
             
         {orders?.map(item => {
+            // eslint-disable-next-line eqeqeq
             let index = allProducts.findIndex((idx) => idx.id == item.id)
             return (
                 <div> 
                     
                 {allProducts[index] ? 
                <div className="homeProductList">
-               <img src={allProducts[index].imageLink} height="50" with ="50"/>
+               <img alt="" src={allProducts[index].imageLink} height="50" with ="50"/>
               <div className='cartProductInfo'>
                   <p>Title: {allProducts[index].title}</p> 
                   <p>Quantity: {item.quantity}</p>

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { storeToken } from "../auth";
-import {Redirect} from "react-router-dom"
 import {fetchProducts, createCartItem} from "../api"
 
 const Products = ({loggedIn, currentUser}) => {
     const [products, setProducts] = useState([]);
-    const [numProductInCart, setNumProductInCart] = useState(1)
 
     //const userId = currentUser.id
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,13 +22,13 @@ const Products = ({loggedIn, currentUser}) => {
                 <div>
                 <h1>Title: {product.title}</h1>
                 <div>{product.imageLink}</div>
-                <img src={product.imageLink} height="200" with ="200"/>
+                <img alt="" src={product.imageLink} height="200" with ="200"/>
                 <button value={product.id} onClick={async()=>{
                     if (loggedIn) {
                         productToAdd.userId = currentUser.id
                         productToAdd.productId = product.id
                         productToAdd.quantity = 1
-                        const response = await createCartItem(productToAdd)
+                        await createCartItem(productToAdd)
                     } else if (!loggedIn){
                         if (localStorage.getItem('guestCartItems')) {
                         guestCart = JSON.parse(localStorage.getItem('guestCartItems'))

@@ -1,5 +1,5 @@
 import { getToken } from "../auth";
-const token = localStorage.getItem('token')
+
 
 export const logIn = async ({ username, password }) => {
   try {

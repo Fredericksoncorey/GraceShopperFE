@@ -5,7 +5,7 @@ const IntroPage = () =>{
 
     return (<div>
               <div className="registerr" >
-                  <h1 className="titleIntro">&#127932;For The Record <img className="iconIntro" src="/record.png"/> </h1>
+                  <h1 className="titleIntro">&#127932;For The Record <img className="iconIntro" alt='' src="/record.png"/> </h1>
                   <div className="intropage">
                   <p>Welcome to the best rated record store in the south! Our three founders Kristen, Corey, and David wanted to create a digital space for those who enjoy listening to their favorite records. We know that these days it is hard to find records in store, therefore we have countless records available at your fingertips.</p>
                   </div>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
 import { React, useEffect, useState } from "react";
-import { fetchProducts, getGenreList, searchProductsByArtist, searchProductsByGenre, searchProductsByTitle, createCartItem, destroyProduct} from "../api";
+import { fetchProducts, searchProductsByArtist, searchProductsByGenre, searchProductsByTitle, destroyProduct} from "../api";
 import { useHistory } from "react-router-dom";
 import ReactHtmlParser from 'react-html-parser';
 
@@ -65,6 +65,7 @@ useEffect(() => {}, [selectedSearch]);
 useEffect(async () => {
         if(!searchResults){
             return
+        // eslint-disable-next-line eqeqeq
         }else if(searchResults==false){
             setSearchFailed(true)
 
@@ -92,7 +93,7 @@ useEffect(async () => {
   
   const handleSubmitDelete = async (deleteProductId) => { 
     try {
-      const response = await destroyProduct(deleteProductId);
+      await destroyProduct(deleteProductId);
         setAllProducts(allProducts.filter(product => product.id !== deleteProductId))
     } catch (error) {
       throw error;

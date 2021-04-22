@@ -46,6 +46,7 @@ const App = () => {
     if (loggedIn) {
         try {
             const data = await getUserInfo(loggedIn);
+            console.log(data)
             setCurrentUser(data);
             if(data.isAdmin){
               setIsAdmin(true)
@@ -65,7 +66,7 @@ const App = () => {
   return (
     <Router>
       <nav className="navBar">
-        <h1 className="title">&#127932;For The Record <img className="icon" src="/record.png"></img></h1>
+        <h1 className="title">&#127932;For The Record <img alt="" className="icon" src="/record.png"></img></h1>
         <div>
           <Link className="Link" to= '/'>Home</Link>
           <Link className="Link" to= '/home'>Shop</Link>

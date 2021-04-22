@@ -6,7 +6,6 @@ const UserCart = ({loggedIn, currentUser}) =>{
     const [allProducts, setAllProducts] = useState([])
     const [userCart, setUserCart] = useState([])
     const [quantityResp, setQuantityResp] = useState()
-    const [quantUpdate, setQuantUpdate] = useState()
     const [currentItem, setCurrentItem] = useState()
     const [cartTotal, setCartTotal] = useState(0)
     let total = 0
@@ -51,7 +50,7 @@ const UserCart = ({loggedIn, currentUser}) =>{
         setUserCart(response)
     }, [quantityResp, currentUser]);
 
-    let newTotal = 0
+    
     if (!userCart[0]) {
         return  (
             <div className="register">
@@ -62,6 +61,7 @@ const UserCart = ({loggedIn, currentUser}) =>{
         return (
         <div className="home">
         {userCart?.map(item => {
+            // eslint-disable-next-line eqeqeq
             let index = allProducts.findIndex((idx) => idx.id == item.product)
             
             if (allProducts[index]) { 
@@ -72,7 +72,7 @@ const UserCart = ({loggedIn, currentUser}) =>{
             <div>
             {allProducts[index] ? 
                 <div className="cartProducts">
-                     <img src={allProducts[index].imageLink} height="50" with ="50"/>
+                     <img alt='' src={allProducts[index].imageLink} height="50" with ="50"/>
                     <div className='cartProductInfo'>
                         <p>Title: {allProducts[index].title}</p> 
                         <p>Quantity: {item.quantity}</p>
@@ -84,6 +84,7 @@ const UserCart = ({loggedIn, currentUser}) =>{
             <div className="removeItem">
                 <button onClick={async()=> {
                     const response = await deleteCartItem(item.id)
+                    // eslint-disable-next-line eqeqeq
                     setUserCart(userCart.filter(cartItem => cartItem.id != response.id));
                 }}>Remove Item From Cart</button>
                 <form id="itemQuantity" onSubmit={handleSubmit}>
@@ -108,8 +109,8 @@ const UserCart = ({loggedIn, currentUser}) =>{
         <button className="checkout" onClick={async()=>{
             alert('Your order has been placed, Thank you!')
             userCart.map(async (item) => {
-                const responseOrder = await createOrder(currentUser.id, null, item.product, item.quantity)
-                const response = await deleteCartItem(item.id)
+                await createOrder(currentUser.id, null, item.product, item.quantity)
+                await deleteCartItem(item.id)
             })
             setUserCart([])
         }}>Checkout</button>

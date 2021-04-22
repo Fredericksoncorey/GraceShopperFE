@@ -15,7 +15,7 @@ import { deleteUser, getAllUsers} from "../api";
 
   const handleSubmitDelete = async (deleteUserId) => { 
     try {
-      const response = await deleteUser(deleteUserId);
+        await deleteUser(deleteUserId);
         setUsers(users.filter(user => user.id !== deleteUserId))
     } catch (error) {
       throw error;

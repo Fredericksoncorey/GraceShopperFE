@@ -23,7 +23,7 @@ const AdminCreateProduct = ({isAdmin}) =>{
                product.imageLink = imageLink
                 
             }
-            const response = await adminCreateProduct(product)
+            await adminCreateProduct(product)
             setFinished(true)
             
 
@@ -72,7 +72,7 @@ const AdminCreateProduct = ({isAdmin}) =>{
                         placeholder=""
                         onChange={(e) => setProduct({ ...product, releaseDate: e.target.value })} />
 
-                    <label>Description: Please copy<u onClick={()=>{setPopOut(true)}}>Template</u>for form. </label>
+                    <label>Description: Please copy <u onClick={()=>{setPopOut(true)}}>Template</u> for form. </label>
                     <input required onChange={(e) => setProduct({ ...product, description: e.target.value })} />
 
                     <label>Price:</label>
