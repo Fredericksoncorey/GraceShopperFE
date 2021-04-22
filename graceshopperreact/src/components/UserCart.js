@@ -65,7 +65,6 @@ const UserCart = ({loggedIn, currentUser}) =>{
 
         return (
         <div className="home">
-           {<button onClick={()=>{getTotal(totals)}}>get total</button> }
         {userCart?.map(item => {
             let index = allProducts.findIndex((idx) => idx.id == item.product)
             
