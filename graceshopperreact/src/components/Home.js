@@ -236,6 +236,7 @@ const Home = ({loggedIn, currentUser, genreList}) => {
             
             :  searchResults?.map((product,key) => {
                 let guestCart = [] 
+                let guestQuantity = []
                 return (
                     <div className="homeProductList" >
                         {product.imageLink===null ? 
@@ -275,12 +276,20 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                                     guestCart.push(product.id)
                                     const newCart = JSON.stringify(guestCart)
                                     localStorage.setItem('guestCartItems', newCart)
+                                    guestQuantity = JSON.parse(localStorage.getItem('guestQuantity'))
+                                    guestQuantity.push(1)
+                                    const newQuantity = JSON.stringify(guestQuantity)
+                                    localStorage.setItem('guestQuantity', newQuantity)
                                     } else {
                                         guestCart = [product.id]
                                         let newCart = JSON.stringify(guestCart)
-                                        localStorage.setItem('guestCartItems', newCart)}
+                                        localStorage.setItem('guestCartItems', newCart)
+                                        guestQuantity = [1]
+                                        let newQuantity = JSON.stringify(guestQuantity)
+                                        localStorage.setItem('guestQuantity', newQuantity)
+                                    }
                                 }
-                }}>Add ProductId to Cart</button>
+                }}>Add Record to Cart</button>
 
                             </div>
                             <div className="feature">
