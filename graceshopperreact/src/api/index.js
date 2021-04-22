@@ -2,9 +2,8 @@ import { getToken } from "../auth";
 const token = localStorage.getItem('token')
 
 export const logIn = async ({ username, password }) => {
-  console.log(username, password);
   try {
-    const response = await fetch(`http://localhost:3000/api/users/login`, {
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/users/login`, {
       method: "POST",
       body: JSON.stringify({ username: username, password: password }),
       headers: {
@@ -12,7 +11,6 @@ export const logIn = async ({ username, password }) => {
       },
     });
     const data = await response.json();
-    //console.log(data)
     return data;
   } catch (error) {
     console.error(error);
@@ -22,7 +20,7 @@ export const logIn = async ({ username, password }) => {
 export const register = async ({ username, password, email }) => {
   //get /users
   try {
-    const response = await fetch(`http://localhost:3000/api/users/register`, {
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/users/register`, {
       method: "POST",
       body: JSON.stringify({
         username: username,
@@ -34,7 +32,6 @@ export const register = async ({ username, password, email }) => {
       },
     });
     const data = response.json();
-    //console.log(data)
     return data;
   } catch (error) {
     console.error(error);
@@ -43,9 +40,8 @@ export const register = async ({ username, password, email }) => {
 
 export const getAllProductsWithReviews = async () => {
   try {
-    const response = await fetch(`http://localhost:3000/api/products`);
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/products`);
     const data = response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -54,7 +50,7 @@ export const getAllProductsWithReviews = async () => {
 
 export const adminCreateProduct = async (product) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/products`, {
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/products`, {
       method: "POST",
       body: JSON.stringify(product),
 
@@ -64,7 +60,6 @@ export const adminCreateProduct = async (product) => {
       },
     });
     const data = response.json();
-    //console.log(data)
     return data;
   } catch (error) {
     console.error(error);
@@ -72,9 +67,9 @@ export const adminCreateProduct = async (product) => {
 };
 
 export const fetchProducts = async () => {
-  //console.log("in fetchProducts")
+
   try {
-    const response = await fetch("http://localhost:3000/api/products", {
+    const response = await fetch("https://powerful-ridge-92450.herokuapp.com/api/products", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +77,7 @@ export const fetchProducts = async () => {
     })
       .then((response) => response.json())
       .catch(console.error);
-    //console.log(response)
+ 
     return response;
   } catch (error) {
     throw error;
@@ -91,14 +86,13 @@ export const fetchProducts = async () => {
 
 export const getUserInfo = async (token) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/users/info`, {
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/users/info`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
     const data = await response.json();
-    //console.log(data)
     return data;
   } catch (error) {
     console.error(error);
@@ -106,9 +100,9 @@ export const getUserInfo = async (token) => {
 };
 
 export const createCartItem = async (product) => {
-  //console.log("createCartItem: ", product);
+ 
   try {
-    const response = await fetch(`http://localhost:3000/api/cartItems`, {
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/cartItems`, {
       method: "POST",
       body: JSON.stringify(product),
 
@@ -126,7 +120,7 @@ export const createCartItem = async (product) => {
 
 export const destroyProduct = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/products/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -135,7 +129,6 @@ export const destroyProduct = async (id) => {
     })
     .then((response) => response.json())
     .catch(console.error);
-    console.log('hello',response)
     return response;
   } catch (error) {
     console.error(error);
@@ -143,10 +136,9 @@ export const destroyProduct = async (id) => {
 };
 
 export const fetchUserCartItems = async (userId) => {
-  //console.log("in fetch")
   try {
     const response = await fetch(
-      `http://localhost:3000/api/cartItems/${userId}`,
+      `https://powerful-ridge-92450.herokuapp.com/api/cartItems/${userId}`,
       {
         method: "GET",
         headers: {
@@ -157,7 +149,6 @@ export const fetchUserCartItems = async (userId) => {
     )
       .then((response) => response.json())
       .catch(console.error);
-    //console.log(response)
     return response;
   } catch (error) {
     throw error;
@@ -169,11 +160,10 @@ export const searchProductsByArtist = async (artist) => {
   if(pos){
     
     let newArtist= artist.split('/') 
-    console.log(newArtist[0])
     
     try {
       const response = await fetch(
-        `http://localhost:3000/api/products/artist/${newArtist[0]}`,
+        `https://powerful-ridge-92450.herokuapp.com/api/products/artist/${newArtist[0]}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -181,7 +171,6 @@ export const searchProductsByArtist = async (artist) => {
         }
       );
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (error) {
       throw error;
@@ -190,7 +179,7 @@ export const searchProductsByArtist = async (artist) => {
   
     try {
       const response = await fetch(
-        `http://localhost:3000/api/products/artist/${artist}`,
+        `https://powerful-ridge-92450.herokuapp.com/api/products/artist/${artist}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -198,7 +187,6 @@ export const searchProductsByArtist = async (artist) => {
         }
       );
       const data = await response.json();
-      console.log(data);
       return data;
     } catch (error) {
       throw error;
@@ -209,13 +197,12 @@ export const searchProductsByArtist = async (artist) => {
 export const searchProductsByGenre = async (genre) => {
     
     try {
-        const response = await fetch(`http://localhost:3000/api/products/genre/${genre}`, {
+        const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/products/genre/${genre}`, {
             headers: {
               'Content-Type': 'application/json',
             },
           })
         const data = await response.json()
-        console.log(data)
         return data
         
             
@@ -230,16 +217,14 @@ export const searchProductsByTitle = async (title) => {
   if(pos){
     
     let newTitle= title.split('/') 
-    console.log(newTitle[0])
     
     try {
-        const response = await fetch(`http://localhost:3000/api/products/title/${newTitle}`, {
+        const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/products/title/${newTitle}`, {
             headers: {
               'Content-Type': 'application/json',
             },
           })
         const data = await response.json()
-        console.log(data)
         return data
         
             
@@ -249,13 +234,12 @@ export const searchProductsByTitle = async (title) => {
   }else{
       
       try {
-        const response = await fetch(`http://localhost:3000/api/products/title/${title}`, {
+        const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/products/title/${title}`, {
             headers: {
               'Content-Type': 'application/json',
             },
           })
         const data = await response.json()
-        console.log(data)
         return data
         
             
@@ -268,7 +252,7 @@ export const searchProductsByTitle = async (title) => {
 
 export const deleteCartItem = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/cartItems/${id}`, {
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/cartItems/${id}`, {
       method: "DELETE",
       //body: id,
       headers: {
@@ -278,7 +262,6 @@ export const deleteCartItem = async (id) => {
     })
       .then((response) => response.json())
       .catch(console.error);
-    //console.log(response)
     return response;
   } catch (error) {
     throw error;
@@ -288,7 +271,7 @@ export const deleteCartItem = async (id) => {
 export const updateProduct = async (product) => {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/products/update/${product.id}`,
+      `https://powerful-ridge-92450.herokuapp.com/api/products/update/${product.id}`,
       {
         method: "PATCH",
         body: JSON.stringify(product),
@@ -309,7 +292,7 @@ export const updateProduct = async (product) => {
 export const editProfile = async (user) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/products/update/${user}`,
+        `https://powerful-ridge-92450.herokuapp.com/api/products/update/${user}`,
         {
           method: "PATCH",
           body: JSON.stringify(user),
@@ -329,7 +312,7 @@ export const editProfile = async (user) => {
 
 export const getAllUsers = async (users) => {
     try {
-      const response = await fetch("http://localhost:3000/api/users", {
+      const response = await fetch("https://powerful-ridge-92450.herokuapp.com/api/users", {
         method: "GET",
         body: JSON.stringify(users),
         headers: {
@@ -353,7 +336,7 @@ export const createOrder = async (userId, guestEmail, productId, quantity) => {
         quantity
     }
     try {
-        const response = await fetch('http://localhost:3000/api/orders', {
+        const response = await fetch('https://powerful-ridge-92450.herokuapp.com/api/orders', {
             method: "POST",
             body: JSON.stringify(order),
             
@@ -363,7 +346,6 @@ export const createOrder = async (userId, guestEmail, productId, quantity) => {
             }
         }).then(response => response.json())
             .catch(console.error);
-            //console.log(response)
             return response
     } catch (error) {
         throw error
@@ -371,9 +353,8 @@ export const createOrder = async (userId, guestEmail, productId, quantity) => {
 }
 
 export const fetchUserOrders = async (userId) => {
-    //console.log("in fetch")
     try {
-        const response = await fetch(`http://localhost:3000/api/orders/${userId}`, {
+        const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/orders/${userId}`, {
             method: "GET",
             headers: {
               'Content-Type': 'application/json',
@@ -381,7 +362,6 @@ export const fetchUserOrders = async (userId) => {
             },
           }).then(response => response.json())
             .catch(console.error);
-            //console.log(response)
             return response
     } catch(error){
         throw error
@@ -390,7 +370,7 @@ export const fetchUserOrders = async (userId) => {
 
 export const deleteUser = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+      const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/products/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -399,7 +379,6 @@ export const deleteUser = async (id) => {
       })
       .then((response) => response.json())
       .catch(console.error);
-      console.log('hello',response)
       return response;
     } catch (error) {
       console.error(error);
@@ -408,14 +387,13 @@ export const deleteUser = async (id) => {
 
   export const getUser = async (token) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/users/info`, {
+      const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/users/info`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
       const data = response.json();
-      //console.log(data)
       return data;
     } catch (error) {
       console.error(error);
@@ -429,7 +407,7 @@ export const createGuestOrder = async (userId, guestEmail, productId, quantity) 
       quantity
   }
   try {
-      const response = await fetch('http://localhost:3000/api/orders', {
+      const response = await fetch('https://powerful-ridge-92450.herokuapp.com/api/orders', {
           method: "POST",
           body: JSON.stringify(order),
           
@@ -438,7 +416,6 @@ export const createGuestOrder = async (userId, guestEmail, productId, quantity) 
           }
       }).then(response => response.json())
           .catch(console.error);
-          //console.log(response)
           return response
   } catch (error) {
       throw error
@@ -447,10 +424,9 @@ export const createGuestOrder = async (userId, guestEmail, productId, quantity) 
 
 export const getGenreList = async () => {
   try {
-      const response = await fetch(`http://localhost:3000/api/products/genreList`
+      const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/products/genreList`
   )
       const data = await response.json()
-      //console.log(data)
       return data
   } catch (error) {
       console.error(error)
@@ -458,9 +434,8 @@ export const getGenreList = async () => {
 }
 
 export const updateItemQuantity= async (id, quantity) => {
-  console.log('id: ', id, 'quantity: ', quantity)
   try {
-    const response = await fetch(`http://localhost:3000/api/cartItems/${id}/${quantity}`, {
+    const response = await fetch(`https://powerful-ridge-92450.herokuapp.com/api/cartItems/${id}/${quantity}`, {
         method: "PATCH"
       }
     );

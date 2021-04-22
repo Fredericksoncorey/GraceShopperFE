@@ -8,9 +8,7 @@ const EditUser = ({userEdit, setUserEdit, currentUser}) => {
       event.preventDefault()
     try {
       const response = await editProfile(user);
-      console.log(response)
       setUser(response)
-      console.log(user);
     } catch (error) {
       throw error;
     }

@@ -21,7 +21,6 @@ const Home = ({loggedIn, currentUser, genreList}) => {
     
     const averageRating = ({reviews}) => {
         let averageRating = 0
-        //console.log(reviews)
         for (let i=0;i<reviews.length;i++){
             averageRating = averageRating + reviews[i].rating
         }
@@ -47,14 +46,13 @@ const Home = ({loggedIn, currentUser, genreList}) => {
         } catch (error) {
             throw error
         }finally{
-           /*  console.log(searchResults) */
               
         }
 
 
     }
     
-    useEffect(() => {console.log(selectedSearch)}, [selectedSearch]);
+    useEffect(() => {}, [selectedSearch]);
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
@@ -73,7 +71,6 @@ const Home = ({loggedIn, currentUser, genreList}) => {
     useEffect(async () => {
         const response = await fetchProducts()
         setAllProducts(response)
-        //console.log(allProducts)
      }, []);
            
      
@@ -86,7 +83,6 @@ const Home = ({loggedIn, currentUser, genreList}) => {
                     name="select"
                     value={selectedSearch}
                     onChange={(e) => {
-                        console.log(genreList)
                         return setSelectedSearch(e.target.value)}}
                 >
                 <option value={false}>Select One</option>

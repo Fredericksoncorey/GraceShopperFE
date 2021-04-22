@@ -8,17 +8,13 @@ const Login = ({setCurrentUser, loggedIn, setLoggedIn }) => {
 
   function helperHandleSubmit(e) {
     setUser({ ...user, password: e.target.value });
-    //setCurrentUser(user.username);
-    /* console.log(currentUser); */
   }
 
   
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(user)
     try {
         const response = await logIn(user)
-        console.log(response)
         if (response.name === "IncorrectCredentialsError") {
           alert(response.message);
         } else {

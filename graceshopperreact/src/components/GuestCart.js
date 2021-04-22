@@ -8,9 +8,6 @@ let newQuantity = ''
  let numCartItems = 1
  let moreCartItems = true
  let productIds = []
-//  localStorage.getItem('guestCartItems')
-//  cart = JSON.parse(localStorage.getItem('guestCartItems'))
-//  console.log('cart :',cart)
 
 const GuestCart = () => {
     const [allProducts, setAllProducts] = useState([])
@@ -25,11 +22,6 @@ const GuestCart = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            //item.quantity = parseInt(e.target.value)
-            //console.log(e.target.value)
-            //console.log('item.id: ', item.id, 'item.quantity: ', item.quantity)
-            //const response = await updateItemQuantity(currentItem.id, currentItem.quantity)
-            //setQuantityResp(response)
         } catch (error) {
             console.log(error)
         } finally {
@@ -38,7 +30,6 @@ const GuestCart = () => {
     } 
 
     const getTotal = (totals) =>{
-        console.log(totals)
         let finalTotal = 0
         totals.forEach(total=>{
             finalTotal = finalTotal + total
@@ -52,7 +43,6 @@ const GuestCart = () => {
     localStorage.getItem('guestCartItems')
     cart = await JSON.parse(localStorage.getItem('guestCartItems'))
     quantity = await JSON.parse(localStorage.getItem('guestQuantity'))
-    //console.log('cart :',cart)
     setGuestCart(cart)
     setGuestQuantity(quantity)
     }, [])
@@ -60,11 +50,8 @@ const GuestCart = () => {
     useEffect(async () => {
         const response = await fetchProducts()
         setAllProducts(response)
-        //console.log(allProducts)
      }, []);
 
-        //setGuestCart(cart)
-        //console.log(guestCart)
     if (!guestCart[0]){
         return(
             <div className="register">

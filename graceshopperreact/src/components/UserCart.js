@@ -24,18 +24,15 @@ const UserCart = ({loggedIn, currentUser}) =>{
     } 
    
    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         const response = await fetchProducts()
         setAllProducts(response)
-        //console.log(allProducts)
      }, []);
     
     const handleSubmit = async (e) => {
             e.preventDefault();
             try {
-                //item.quantity = parseInt(e.target.value)
-                //console.log(e.target.value)
-                //console.log('item.id: ', item.id, 'item.quantity: ', item.quantity)
                 const response = await updateItemQuantity(currentItem.id, currentItem.quantity)
                 setQuantityResp(response)
             } catch (error) {
@@ -52,7 +49,6 @@ const UserCart = ({loggedIn, currentUser}) =>{
         }
         const response = await fetchUserCartItems(currentUser.id)
         setUserCart(response)
-        //console.log(response)
     }, [quantityResp, currentUser]);
 
     let newTotal = 0
@@ -61,7 +57,7 @@ const UserCart = ({loggedIn, currentUser}) =>{
             <div className="register">
                 <h2 className="cartH2" >Your cart is empty.</h2>
             </div>)
-    } else { //console.log(userCart)
+    } else { 
 
         return (
         <div className="home">
@@ -89,14 +85,11 @@ const UserCart = ({loggedIn, currentUser}) =>{
                 <button onClick={async()=> {
                     const response = await deleteCartItem(item.id)
                     setUserCart(userCart.filter(cartItem => cartItem.id != response.id));
-                    //alert("Item has been removed")
-                    //console.log(response)
                 }}>Remove Item From Cart</button>
                 <form id="itemQuantity" onSubmit={handleSubmit}>
                     <label htmlFor = "quantity">Quantity:</label>
                     <input type ="number" min="1" placeholder={item.quantity}
                         onChange={(e) => { 
-                        // console.log(total, cartTotal)
                         total = cartTotal - (parseFloat(allProducts[index].price.slice(1)) * item.quantity)
                         item.quantity = parseInt(e.target.value) 
                         total = total + (parseFloat(allProducts[index].price.slice(1)) * item.quantity)
@@ -113,14 +106,10 @@ const UserCart = ({loggedIn, currentUser}) =>{
         
         <p className="total">Cart Total ${getTotal(totals)}</p>
         <button className="checkout" onClick={async()=>{
-            //console.log('button clicked')
             alert('Your order has been placed, Thank you!')
-            console.log(userCart)
             userCart.map(async (item) => {
-                //console.log('item: ', item)
                 const responseOrder = await createOrder(currentUser.id, null, item.product, item.quantity)
                 const response = await deleteCartItem(item.id)
-                //setUserCart(userCart.filter(cartItem => cartItem.id != response.id))
             })
             setUserCart([])
         }}>Checkout</button>

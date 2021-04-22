@@ -18,15 +18,12 @@ const AdminCreateProduct = ({isAdmin}) =>{
     const handleSubmit = async (evt)=>{
         evt.preventDefault();
         const imageLink = evt.target[1].value
-        console.log(imageLink)
         try {
             if(imageLink){
-                console.log("Hit Conditional")
                product.imageLink = imageLink
                 
             }
             const response = await adminCreateProduct(product)
-            console.log(response)
             setFinished(true)
             
 
@@ -75,7 +72,7 @@ const AdminCreateProduct = ({isAdmin}) =>{
                         placeholder=""
                         onChange={(e) => setProduct({ ...product, releaseDate: e.target.value })} />
 
-                    <label>Description: Please copy<u onClick={()=>{setPopOut(true); console.log(popOut)}}>Template</u>for form. </label>
+                    <label>Description: Please copy<u onClick={()=>{setPopOut(true)}}>Template</u>for form. </label>
                     <input required onChange={(e) => setProduct({ ...product, description: e.target.value })} />
 
                     <label>Price:</label>
@@ -87,7 +84,6 @@ const AdminCreateProduct = ({isAdmin}) =>{
                     <button type="submit">submit</button>
             </form>
             
-            <button onClick={()=>{console.log(popOut)}}></button>
             {popOut ? <Popout onClosing={closeHandle} title='Description Template'>
                 <div> 
                 <p>{`<b>Side one</b>`}</p>

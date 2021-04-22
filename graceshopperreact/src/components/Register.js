@@ -8,11 +8,8 @@ const Register = ({ setAuthorized, loggedIn, setLoggedIn }) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log (user.username)
-    console.log (user.password)
     try {
         const response = await register(user)
-        console.log(response)
         if (response.message === "Thank you for signing up!") {
           alert(response.message);
           setLoggedIn(response.token)

@@ -23,20 +23,18 @@ const Orders = ({currentUser}) => {
     }
     }, [currentUser])
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         const response = await fetchProducts()
         setAllProducts(response)
-        //console.log(allProducts)
      }, []);
 
-    console.log(orders)
     return (
         <div className="home">
             <h2>Past Purchases:</h2>
             
         {orders?.map(item => {
             let index = allProducts.findIndex((idx) => idx.id == item.id)
-            console.log(index)
             return (
                 <div> 
                     

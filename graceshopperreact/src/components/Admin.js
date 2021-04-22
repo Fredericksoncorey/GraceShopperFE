@@ -26,7 +26,6 @@ const Admin = ({ isAdmin, setProductEdit, loggedIn, currentUser, genreList }) =>
 
   const averageRating = ({reviews}) => {
     let averageRating = 0
-    console.log(reviews)
     for (let i=0;i<reviews.length;i++){
         averageRating = averageRating + reviews[i].rating
     }
@@ -52,7 +51,6 @@ const handleSubmit = async (event) => {
     } catch (error) {
         throw error
     }finally{
-       /*  console.log(searchResults) */
           
     }
 
@@ -61,7 +59,7 @@ const handleSubmit = async (event) => {
 
 
 
-useEffect(() => {console.log(selectedSearch)}, [selectedSearch]);
+useEffect(() => {}, [selectedSearch]);
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(async () => {
@@ -82,9 +80,7 @@ useEffect(async () => {
     try {
       const response = await fetchProducts()
       setAllProducts(response)
-      console.log(allProducts)
     } catch (error) {
-      console.log(error);
     }
   }, []);
 
@@ -98,7 +94,6 @@ useEffect(async () => {
     try {
       const response = await destroyProduct(deleteProductId);
         setAllProducts(allProducts.filter(product => product.id !== deleteProductId))
-        console.log(response)
     } catch (error) {
       throw error;
     }
@@ -121,7 +116,6 @@ useEffect(async () => {
                     name="select"
                     value={selectedSearch}
                     onChange={(e) => {
-                        console.log(genreList)
                         return setSelectedSearch(e.target.value)}}
                 >
                 <option value={false}>Select One</option>

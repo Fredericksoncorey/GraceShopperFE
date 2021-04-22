@@ -3,7 +3,6 @@ import { storeToken } from "../auth";
 import {Redirect} from "react-router-dom"
 import {fetchProducts, createCartItem} from "../api"
 
-//console.log('??')
 const Products = ({loggedIn, currentUser}) => {
     const [products, setProducts] = useState([]);
     const [numProductInCart, setNumProductInCart] = useState(1)
@@ -11,10 +10,8 @@ const Products = ({loggedIn, currentUser}) => {
     //const userId = currentUser.id
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
-        console.log('in useEffect')
         const response = await fetchProducts()
         setProducts(response)
-        //console.log(products)
     }, []);
 
     let guestCart = [] 

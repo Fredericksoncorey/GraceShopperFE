@@ -14,7 +14,7 @@ const IntroPage = () =>{
                   <img alt="imageLink" src="https://upload.wikimedia.org/wikipedia/en/0/02/Queen_Greatest_Hits.png"/>
                   <img alt="imageLink" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/ACDC_Back_in_Black.png/220px-ACDC_Back_in_Black.png"/>
                   <img alt="imageLink" src="https://upload.wikimedia.org/wikipedia/en/0/00/Eagles_-_Their_Greatest_Hits_%281971-1975%29.jpg"/></div>
-                  </div>
+                  </div> 
             </div>)
 }
 

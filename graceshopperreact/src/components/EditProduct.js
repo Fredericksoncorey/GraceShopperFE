@@ -8,9 +8,7 @@ const EditProduct = ({productEdit, setProductEdit}) => {
       event.preventDefault()
     try {
       const response = await updateProduct(product);
-      console.log(response)
       setProduct(response)
-      console.log(product);
     } catch (error) {
       throw error;
     }

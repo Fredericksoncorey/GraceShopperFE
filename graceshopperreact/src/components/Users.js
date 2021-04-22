@@ -8,7 +8,6 @@ import { deleteUser, getAllUsers} from "../api";
     try {
       const response = await getAllUsers();
       setUsers(response)
-      console.log(users);
     } catch (error) {
       console.log(error);
     }
@@ -18,7 +17,6 @@ import { deleteUser, getAllUsers} from "../api";
     try {
       const response = await deleteUser(deleteUserId);
         setUsers(users.filter(user => user.id !== deleteUserId))
-        console.log(response)
     } catch (error) {
       throw error;
     }

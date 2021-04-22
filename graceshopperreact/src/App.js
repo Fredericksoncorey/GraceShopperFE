@@ -46,7 +46,6 @@ const App = () => {
     if (loggedIn) {
         try {
             const data = await getUserInfo(loggedIn);
-            console.log(data)
             setCurrentUser(data);
             if(data.isAdmin){
               setIsAdmin(true)
